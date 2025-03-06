@@ -28,6 +28,7 @@ function Navbar() {
           {/* Desktop Menu */}
           <ul className="hidden md:flex md:space-x-8">
             <li><Link to="/about" className="hover:text-gray-400">About</Link></li>
+
             <li><Link to="/features" className="hover:text-gray-400">Features</Link></li>
             <li><a href="/customer" className="hover:text-gray-400">Customers</a></li>
             <li><a href="/pricing" className="hover:text-gray-400">Pricing</a></li>
