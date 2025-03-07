@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search } from "lucide-react";
+import { Search, ChevronDown, Plus } from "lucide-react";
 
 export default function TaskPanel() {
   const [tasks, setTasks] = useState([
@@ -7,95 +7,135 @@ export default function TaskPanel() {
     { id: 2, text: "Another Task", status: "In Progress" },
     { id: 3, text: "Completed Task", status: "Closed" },
   ]);
-  const [newTaskText, setNewTaskText] = useState("");
-  const [newTaskStatus, setNewTaskStatus] = useState("To do");
-  const [showInput, setShowInput] = useState(null); // To show input for a specific status
-  const [searchQuery, setSearchQuery] = useState(""); // Search query for tasks
+  const [searchQuery, setSearchQuery] = useState("");
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [expandedSections, setExpandedSections] = useState({
+    "To do": true,
+    "In Progress": true,
+    "Closed": true,
+  });
+  const [newTasks, setNewTasks] = useState({
+    "To do": "",
+    "In Progress": "",
+    "Closed": "",
+  });
+  const [showInput, setShowInput] = useState({
+    "To do": false,
+    "In Progress": false,
+    "Closed": false,
+  });
 
-  const addTask = () => {
-    if (newTaskText.trim() !== "") {
-      setTasks([
-        ...tasks,
-        { id: tasks.length + 1, text: newTaskText, status: newTaskStatus },
+  const addTask = (status) => {
+    if (newTasks[status].trim() !== "") {
+      setTasks((prevTasks) => [
+        ...prevTasks,
+        { id: prevTasks.length + 1, text: newTasks[status], status },
       ]);
-      setNewTaskText(""); // Reset task input field
-      setShowInput(null); // Hide the input field after task is added
+      setNewTasks({ ...newTasks, [status]: "" });
+      setShowInput({ ...showInput, [status]: false });
     }
   };
 
-  // Filter tasks by search query
-  const filteredTasks = tasks.filter(task =>
+  const toggleSection = (status) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [status]: !prev[status],
+    }));
+  };
+
+  const filteredTasks = tasks.filter((task) =>
     task.text.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  // Render tasks filtered by status
+  const statusColors = {
+    "To do": "#9CA3AF",
+    "In Progress": "#3B82F6",
+    "Closed": "#10B981",
+  };
+
   const renderTasks = (status) =>
     filteredTasks
       .filter((task) => task.status === status)
       .map((task) => (
-        <div key={task.id} className="flex p-3 rounded shadow-sm bg-gray-50 mb-4">
-          <span className="text-gray-800">{task.text}</span>
+        <div
+          key={task.id}
+          className="flex items-center space-x-2 py-2 bg-gray-100 p-3 rounded-lg mb-2"
+        >
+          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: statusColors[task.status] }}></div>
+          <span className="text-gray-800 text-sm">{task.text}</span>
         </div>
       ));
 
   return (
     <div className="mx-auto p-6">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">Task Panel</h2>
-
-      {/* Search bar with icon */}
-      <div className="flex items-center px-4 py-2 rounded-lg bg-gray-100 w-[30%] max-w-[30%] mb-6">
-      <Search size={18} className="text-gray-500" />
+      {/* Search Box */}
+      <div className="flex items-center bg-gray-100 p-3 rounded-lg mb-4">
+        <Search size={18} className="text-gray-500" />
         <input
           type="text"
-          value={searchQuery} // Bind search query state
-          onChange={(e) => setSearchQuery(e.target.value)} // Update search query state on input change
-          placeholder="Search tasks..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search"
           className="ml-2 w-full outline-none bg-transparent"
         />
       </div>
 
-      {/* Task categories: To do, In Progress, Closed */}
-      <div className="flex flex-col space-y-6">
-        {["To do", "In Progress", "Closed"].map((status) => (
-          <div key={status} className="p-2  rounded shadow-md bg-white">
-            <div className="flex justify-start items-center mb-3">
-              <p className="font-semibold text-sm">{status}</p>
-
-              {/* Plus button to add task */}
-              <button
-                className="bg-green-500 border rounded-full text-lg ml-2"
-                onClick={() => {
-                  setShowInput(status); // Show input for the clicked status
-                  setNewTaskStatus(status); // Set the new task status
-                }}
-              >
-                +
-              </button>
+      {/* Task Lists */}
+      {Object.keys(statusColors).map((status) => (
+        <div key={status} className="mb-6">
+          {/* Section Header */}
+          <div className="flex justify-start items-center cursor-pointer" onClick={() => toggleSection(status)}>
+            <div className="flex items-center space-x-2">
+              <p className="text-sm font-semibold">{status}</p>
+              <span className="text-xs bg-gray-200 px-2 py-1 rounded-full">
+                {filteredTasks.filter((task) => task.status === status).length}
+              </span>
+              <ChevronDown
+                size={14}
+                className={`text-gray-500 transform transition-transform ${
+                  expandedSections[status] ? "rotate-180" : ""
+                }`}
+              />
             </div>
-
-            {/* Show input to add a new task */}
-            {showInput === status && (
-              <div className="flex mb-3">
-                <input
-                  type="text"
-                  value={newTaskText}
-                  onChange={(e) => setNewTaskText(e.target.value)}
-                  placeholder="Enter new task..."
-                  className="border p-2 rounded w-full shadow-md rounded-lg bg-gray-100 w-[70%] max-w-[70%]"
-                />
-                <button
-                  className="ml-3 px-4 py-2 bg-blue-600 border rounded-full rounded-lg bg-gray-100 w-[15%] max-w-[15%]"
-                  onClick={addTask}
-                >
-                  Add Task
-                </button>
-              </div>
-            )}
-
-            {renderTasks(status)}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowInput({ ...showInput, [status]: !showInput[status] });
+              }}
+              className="p-1 ml-2 rounded-full bg-blue-500  hover:bg-blue-600"
+            >
+              <Plus size={16} />
+            </button>
           </div>
-        ))}
-      </div>
+
+          {/* Task List */}
+          {expandedSections[status] && (
+            <div className="mt-2 pl-4">
+              {renderTasks(status)}
+
+              {/* Task Input Box */}
+              {showInput[status] && (
+                <div className="mt-2 flex space-x-2">
+                  <input
+                    type="text"
+                    value={newTasks[status]}
+                    onChange={(e) => setNewTasks({ ...newTasks, [status]: e.target.value })}
+                    placeholder="Enter task..."
+                    className="w-full px-3 py-2 border rounded-lg outline-none"
+                    autoFocus
+                  />
+                  <button
+                    onClick={() => addTask(status)}
+                    className="px-3 py-2 bg-green-500  rounded-lg hover:bg-green-600"
+                  >
+                    Add
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   );
 }
