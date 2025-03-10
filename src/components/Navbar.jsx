@@ -58,12 +58,12 @@ function Navbar() {
         {/* Mobile Menu (Hidden by default) */}
         <div className={`md:hidden bg-white shadow-lg transition-all duration-300 overflow-hidden ${isOpen ? "max-h-screen p-4" : "max-h-0"}`}>
           <ul className="flex flex-col items-center space-y-4">
-          <li><a href="/about" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>About</a></li>
+          <li><Link to="/about" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>About</Link></li>
             <li><Link to="/features" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Features</Link></li>
-            <li><a href="/pricing" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Customers</a></li>
-            <li><a href="/customer" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Pricing</a></li>
-            <li><a href="/help" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Help</a></li>
-            <li><a href="#" className="hover:text-gray-400">Book a demo</a></li>
+            <li><Link to="/pricing" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Customers</Link></li>
+            <li><Link to="/customer" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Pricing</Link></li>
+            <li><Link to="/help" className="hover:text-gray-400" onClick={() => setIsOpen(false)}>Help</Link></li>
+            <li><Link to="#" className="hover:text-gray-400">Book a demo</Link></li>
             <li>
               <Link
                 to="/dashboard"
