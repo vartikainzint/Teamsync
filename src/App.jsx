@@ -10,6 +10,8 @@ import Customer from "./pages/Customer";
 import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import InboxPanel from "./components/InBox";
+import Login from "./pages/Login";
+import RegisterPage from "./pages/Register";
 
 function Layout({ children }) {
   const location = useLocation();
@@ -37,6 +39,8 @@ function App() {
         <Route path="/help" element={<Layout><Help /></Layout>} />
         <Route path="/about" element={<Layout><About /></Layout>} />
         <Route path="/customer" element={<Layout><Customer /></Layout>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterPage />} />
 
         {/* Dashboard Route */}
         <Route path="/dashboard" element={<Dashboard />} />
