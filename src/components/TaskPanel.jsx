@@ -53,15 +53,50 @@ export default function TaskPanel() {
     "Closed": "#10B981",
   };
 
+  const handleStatusChange = (taskId, newStatus) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === taskId ? { ...task, status: newStatus } : task
+      )
+    );
+    setOpenDropdown(null); // Close dropdown after selection
+  };
+
   const renderTasks = (status) =>
     filteredTasks
       .filter((task) => task.status === status)
       .map((task) => (
         <div
           key={task.id}
-          className="flex items-center space-x-2 py-2 bg-gray-100 p-3 rounded-lg mb-2"
+          className="flex items-center space-x-2 py-2 bg-gray-100 p-3 rounded-lg mb-2 relative"
         >
-          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: statusColors[task.status] }}></div>
+          {/* Clickable Dot with Dropdown */}
+          <div className="relative">
+            <div
+              className="w-4 h-4 rounded-full cursor-pointer"
+              style={{ backgroundColor: statusColors[task.status] }}
+              onClick={() =>
+                setOpenDropdown((prev) => (prev === task.id ? null : task.id))
+              }
+            ></div>
+
+            {/* Dropdown */}
+            {openDropdown === task.id && (
+              <div className="absolute left-0 mt-2 bg-white border rounded shadow-lg z-10 w-48">
+                {Object.keys(statusColors).map((s) => (
+                  <div
+                    key={s}
+                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                    onClick={() => handleStatusChange(task.id, s)}
+                  >
+                    {s}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Task Text */}
           <span className="text-gray-800 text-sm">{task.text}</span>
         </div>
       ));
@@ -84,7 +119,10 @@ export default function TaskPanel() {
       {Object.keys(statusColors).map((status) => (
         <div key={status} className="mb-6">
           {/* Section Header */}
-          <div className="flex justify-start items-center cursor-pointer" onClick={() => toggleSection(status)}>
+          <div
+            className="flex justify-start items-center cursor-pointer"
+            onClick={() => toggleSection(status)}
+          >
             <div className="flex items-center space-x-2">
               <p className="text-sm font-semibold">{status}</p>
               <span className="text-xs bg-gray-200 px-2 py-1 rounded-full">
@@ -102,7 +140,7 @@ export default function TaskPanel() {
                 e.stopPropagation();
                 setShowInput({ ...showInput, [status]: !showInput[status] });
               }}
-              className="p-1 ml-2 rounded-full bg-blue-500  hover:bg-blue-600"
+              className="p-1 ml-2 rounded-full bg-blue-500 hover:bg-blue-600"
             >
               <Plus size={16} />
             </button>
@@ -119,14 +157,16 @@ export default function TaskPanel() {
                   <input
                     type="text"
                     value={newTasks[status]}
-                    onChange={(e) => setNewTasks({ ...newTasks, [status]: e.target.value })}
+                    onChange={(e) =>
+                      setNewTasks({ ...newTasks, [status]: e.target.value })
+                    }
                     placeholder="Enter task..."
                     className="w-full px-3 py-2 border rounded-lg outline-none"
                     autoFocus
                   />
                   <button
                     onClick={() => addTask(status)}
-                    className="px-3 py-2 bg-green-500  rounded-lg hover:bg-green-600"
+                    className="px-3 py-2 bg-green-500 rounded-lg hover:bg-green-600"
                   >
                     Add
                   </button>

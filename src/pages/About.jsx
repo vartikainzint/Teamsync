@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import sharedInboxImg from "../assets/images/img-sharedinbox.png"; // Importing the custom image
 
 const About = () => {
+
   return (
     <div className="container mx-auto px-6 py-16">
       {/* Hero Section */}

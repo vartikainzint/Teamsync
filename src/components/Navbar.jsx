@@ -30,9 +30,9 @@ function Navbar() {
             <li><Link to="/about" className="hover:text-gray-400">About</Link></li>
 
             <li><Link to="/features" className="hover:text-gray-400">Features</Link></li>
-            <li><a href="/customer" className="hover:text-gray-400">Customers</a></li>
-            <li><a href="/pricing" className="hover:text-gray-400">Pricing</a></li>
-            <li><a href="/help" className="hover:text-gray-400">Help</a></li>
+            <li><Link to="/customer" className="hover:text-gray-400">Customers</Link></li>
+            <li><Link to="/pricing" className="hover:text-gray-400">Pricing</Link></li>
+            <li><Link to="/help" className="hover:text-gray-400">Help</Link></li>
           </ul>
 
           {/* Right - Desktop Links */}
