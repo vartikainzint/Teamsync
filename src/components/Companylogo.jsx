@@ -6,7 +6,7 @@ const TrustedCompanies = () => {
     <section className="flex flex-col items-center text-center py-16 px-4 bg-gray-100">
       {/* Heading */}
       <h2 className="text-4xl font-bold text-gray-900 leading-tight mb-4" style={{ fontFamily: '"Tiempos Headline", "Times New Roman", sans-serif' }}>
-      4000+ companies rely on <span className="text-blue-600">Missive</span> every day
+      4000+ companies rely on <span className="text-blue-600">teamsync</span> every day
       </h2>
 
       {/* Logo Grid */}
