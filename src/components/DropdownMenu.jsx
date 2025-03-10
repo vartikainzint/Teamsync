@@ -10,7 +10,7 @@ export default function DropdownMenu({ setDropdownOpen }) {
   ];
 
   return (
-    <div className="absolute top-8  left-12 right-0 w-60 bg-white rounded-md p-2">
+    <div className="absolute top-8  left-12 right-0 w-60 bg-white rounded-md p-2 shadow">
       <ul className="space-y-1">
         {menuItems.map(({ text, icon: Icon, shortcut, submenu }) => (
           <li

@@ -15,8 +15,8 @@ export default function Sidebar({ selectedTab, setSelectedTab, setCalendarVisibl
   ];
 
   return (
-    <aside className="w-64 p-4 bg-gray-100 min-h-screen flex flex-col shadow-lg relative">
-      {/* Profile Section */}
+<aside className="w-64 p-4 bg-gray-100 min-h-screen flex flex-col shadow-lg relative overflow-visible">
+{/* Profile Section */}
       <div className="relative flex items-center mb-6 justify-end">
         <img src={profileImage} alt="Profile" className="w-10 h-10 rounded-full" />
         <Plus
@@ -26,10 +26,11 @@ export default function Sidebar({ selectedTab, setSelectedTab, setCalendarVisibl
         
         {/* Dropdown Menu - Shows when Plus is clicked */}
         {dropdownOpen && (
-          <div className="absolute top-12 right-0 w-48 rounded-lg p-2">
-            <DropdownMenu setDropdownOpen={setDropdownOpen} />
-          </div>
-        )}
+  <div className="absolute top-12 right-0 w-48 rounded-lg p-2 z-50 sidebar-div">
+    <DropdownMenu setDropdownOpen={setDropdownOpen} />
+  </div>
+)}
+
       </div>
 
       {/* Sidebar Menu */}
