@@ -86,7 +86,12 @@ button:focus-visible {
 html {
   scroll-behavior: smooth;
 }
-.sidebar-div {
+.sidebar-div,.setting-sidebar {
   position: fixed;
-  left: 0;
+  left: 15%;
+  top: 12%;
+}
+.for-users button {
+  background: transparent;
+  box-shadow: none;
 }

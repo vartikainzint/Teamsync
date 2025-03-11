@@ -1,9 +1,9 @@
 export default function SidebarItem({ text, icon, count, active, onClick }) {
   return (
     <div
-      className={`flex items-center justify-between p-3 rounded-lg cursor-pointer relative ${
-        active ? "bg-gray-200 font-bold z-20" : "hover:bg-gray-100 z-10"
-      }`}
+      className={`flex items-center justify-between p-3 rounded-lg cursor-pointer relative transition-colors
+        ${active ? "bg-gray-700 text-white font-semibold" : "hover:bg-gray-700 text-gray-300"}
+      `}
       onClick={onClick}
     >
       <div className="flex items-center space-x-2">
@@ -11,7 +11,7 @@ export default function SidebarItem({ text, icon, count, active, onClick }) {
         <span className="text-sm">{text}</span>
       </div>
       {count > 0 && (
-        <span className="text-xs bg-gray-300 px-2 py-0.5 rounded-full">
+        <span className="text-xs bg-gray-600 text-gray-100 px-2 py-0.5 rounded-full">
           {count}
         </span>
       )}

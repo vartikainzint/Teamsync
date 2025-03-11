@@ -7,6 +7,7 @@ export default function TaskPanel() {
     { id: 2, text: "Another Task", status: "In Progress" },
     { id: 3, text: "Completed Task", status: "Closed" },
   ]);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [openDropdown, setOpenDropdown] = useState(null);
   const [expandedSections, setExpandedSections] = useState({
@@ -24,6 +25,12 @@ export default function TaskPanel() {
     "In Progress": false,
     "Closed": false,
   });
+
+  const statusColors = {
+    "To do": "#9CA3AF",
+    "In Progress": "#3B82F6",
+    "Closed": "#10B981",
+  };
 
   const addTask = (status) => {
     if (newTasks[status].trim() !== "") {
@@ -43,24 +50,18 @@ export default function TaskPanel() {
     }));
   };
 
-  const filteredTasks = tasks.filter((task) =>
-    task.text.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const statusColors = {
-    "To do": "#9CA3AF",
-    "In Progress": "#3B82F6",
-    "Closed": "#10B981",
-  };
-
   const handleStatusChange = (taskId, newStatus) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === taskId ? { ...task, status: newStatus } : task
       )
     );
-    setOpenDropdown(null); // Close dropdown after selection
+    setOpenDropdown(null);
   };
+
+  const filteredTasks = tasks.filter((task) =>
+    task.text.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const renderTasks = (status) =>
     filteredTasks
@@ -70,7 +71,7 @@ export default function TaskPanel() {
           key={task.id}
           className="flex items-center space-x-2 py-2 bg-gray-100 p-3 rounded-lg mb-2 relative"
         >
-          {/* Clickable Dot with Dropdown */}
+          {/* Status Dot and Dropdown */}
           <div className="relative">
             <div
               className="w-4 h-4 rounded-full cursor-pointer"
@@ -80,9 +81,9 @@ export default function TaskPanel() {
               }
             ></div>
 
-            {/* Dropdown */}
+            {/* Status Change Dropdown */}
             {openDropdown === task.id && (
-              <div className="absolute left-0 mt-2 bg-white border rounded shadow-lg z-10 w-48">
+              <div className="absolute left-0 mt-2 bg-white border rounded shadow-lg z-10 w-40">
                 {Object.keys(statusColors).map((s) => (
                   <div
                     key={s}
@@ -103,7 +104,7 @@ export default function TaskPanel() {
 
   return (
     <div className="mx-auto p-6">
-      {/* Search Box */}
+      {/* Search Input */}
       <div className="flex items-center bg-gray-100 p-3 rounded-lg mb-4">
         <Search size={18} className="text-gray-500" />
         <input
@@ -115,12 +116,12 @@ export default function TaskPanel() {
         />
       </div>
 
-      {/* Task Lists */}
+      {/* Task Sections */}
       {Object.keys(statusColors).map((status) => (
         <div key={status} className="mb-6">
           {/* Section Header */}
           <div
-            className="flex justify-start items-center cursor-pointer"
+            className="flex justify-between items-center cursor-pointer"
             onClick={() => toggleSection(status)}
           >
             <div className="flex items-center space-x-2">
@@ -135,14 +136,16 @@ export default function TaskPanel() {
                 }`}
               />
             </div>
+
+            {/* Add Task Button */}
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 setShowInput({ ...showInput, [status]: !showInput[status] });
               }}
-              className="p-1 ml-2 rounded-full bg-blue-500 hover:bg-blue-600"
+              className="p-1 rounded-full bg-blue-500 hover:bg-blue-600"
             >
-              <Plus size={16} />
+              <Plus size={16} color="white" />
             </button>
           </div>
 
@@ -151,7 +154,7 @@ export default function TaskPanel() {
             <div className="mt-2 pl-4">
               {renderTasks(status)}
 
-              {/* Task Input Box */}
+              {/* Add Task Input */}
               {showInput[status] && (
                 <div className="mt-2 flex space-x-2">
                   <input
@@ -166,7 +169,7 @@ export default function TaskPanel() {
                   />
                   <button
                     onClick={() => addTask(status)}
-                    className="px-3 py-2 bg-green-500 rounded-lg hover:bg-green-600"
+                    className="px-3 py-2 bg-green-500 rounded-lg text-white hover:bg-green-600"
                   >
                     Add
                   </button>

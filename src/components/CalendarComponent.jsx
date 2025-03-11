@@ -32,57 +32,66 @@ const CalendarComponent = () => {
   };
 
   return (
-    <div className="relative p-4">
+    <div className="relative p-6 bg-gray-900 min-h-screen text-white">
       {/* Add Event Button */}
       <button
-        className="px-5 py-2 bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 transition"
+        className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
         onClick={() => setModalOpen(true)}
       >
         + Add Event
       </button>
 
       {/* Calendar */}
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        date={date}
-        views={["month", "week", "day", "agenda"]}
-        defaultView="month"
-        view={view}
-        onView={(newView) => setView(newView)}
-        onNavigate={(newDate) => setDate(newDate)}
-        selectable
-        style={{ height: "80vh", marginTop: "20px" }}
-      />
+      <div className="mt-6 bg-gray-800 p-5 rounded-xl shadow-lg">
+        <Calendar
+          localizer={localizer}
+          events={events}
+          startAccessor="start"
+          endAccessor="end"
+          date={date}
+          views={["month", "week", "day", "agenda"]}
+          defaultView="month"
+          view={view}
+          onView={(newView) => setView(newView)}
+          onNavigate={(newDate) => setDate(newDate)}
+          selectable
+          style={{
+            height: "75vh",
+            color: "white",
+            backgroundColor: "#111827",
+            padding: "10px",
+            borderRadius: "12px",
+          }}
+        />
+      </div>
 
       {/* Modal for Adding Event */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-xl w-96">
-            <h2 className="text-lg font-semibold mb-4">Add New Event</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+          <div className="bg-gray-800 p-6 rounded-lg shadow-xl w-96 border border-gray-700">
+            <h2 className="text-lg font-semibold mb-4 text-white">Add New Event</h2>
             <input
               type="text"
               placeholder="Event Title"
               value={newEventTitle}
               onChange={(e) => setNewEventTitle(e.target.value)}
-              className="w-full p-2 border rounded mb-3"
+              className="w-full p-3 border border-gray-600 bg-gray-700 text-white rounded mb-4 focus:outline-none"
             />
             <DatePicker
               selected={newEventDate}
               onChange={(date) => setNewEventDate(date)}
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none"
+              calendarClassName="dark-datepicker"
             />
-            <div className="flex justify-end space-x-3 mt-4">
+            <div className="flex justify-end space-x-4 mt-6">
               <button
-                className="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+                className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
                 onClick={() => setModalOpen(false)}
               >
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-blue-600  rounded-lg hover:bg-blue-700"
+                className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
                 onClick={handleAddEvent}
               >
                 Add Event
@@ -91,6 +100,28 @@ const CalendarComponent = () => {
           </div>
         </div>
       )}
+
+      {/* Dark mode styling for datepicker */}
+      <style jsx>{`
+        :global(.react-datepicker) {
+          background-color: #1f2937 !important;
+          border: 1px solid #374151;
+          color: white;
+        }
+        :global(.react-datepicker__header) {
+          background-color: #374151 !important;
+          border-bottom: 1px solid #4b5563;
+        }
+        :global(.react-datepicker__day) {
+          color: white;
+        }
+        :global(.react-datepicker__day--selected) {
+          background-color: #2563eb !important;
+        }
+        :global(.react-datepicker__day--keyboard-selected) {
+          background-color: #1d4ed8 !important;
+        }
+      `}</style>
     </div>
   );
 };
