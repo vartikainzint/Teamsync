@@ -1,7 +1,7 @@
 export default function SidebarItem({ text, icon, count, active, onClick }) {
   return (
     <div
-      className={`flex items-center justify-between p-3 rounded-lg cursor-pointer relative transition-colors
+      className={`flex items-center justify-between p-2 rounded-lg cursor-pointer relative transition-colors
         ${active ? "bg-gray-700 text-white font-semibold" : "hover:bg-gray-700 text-gray-300"}
       `}
       onClick={onClick}

@@ -6,8 +6,8 @@ export default function UserList() {
 
   const users = [
     {
-      name: "Vartika Pandey",
-      email: "pandeyvartika94@gmail.com",
+      name: "Test",
+      email: "test@gmail.com",
       login: "Google",
       role: "Owner",
       status: "Active",
@@ -46,7 +46,7 @@ export default function UserList() {
             E
           </div>
           <div>
-            <h1 className="text-xl font-semibold">eve3ve</h1>
+            <h1 className="text-xl font-semibold">Org name</h1>
             <p className="text-gray-400 text-sm">Users</p>
           </div>
         </div>
@@ -193,7 +193,7 @@ export default function UserList() {
       <div className="flex justify-between items-center border-b border-gray-700 px-6 py-4">
         <h2 className="text-lg font-semibold">
           Invite new user to 
-          <span className="bg-gray-700 text-white text-sm font-medium px-2 py-1 rounded-full ml-2">eve3ve</span>
+          <span className="bg-gray-700 text-white text-sm font-medium px-2 py-1 rounded-full ml-2">Org name</span>
         </h2>
         <button
           onClick={handleCloseModal}
@@ -241,7 +241,7 @@ export default function UserList() {
           />
 
           {/* Copy Settings Toggle */}
-          <div className="flex items-center justify-between border border-gray-700 rounded-lg px-4 py-3">
+          <div className="flex items-center justify-start border border-gray-700 rounded-lg px-4 py-3">
           <label className="relative inline-flex items-center cursor-pointer mr-4">
               <input type="checkbox" value="" className="sr-only peer" />
               <div className="w-11 h-6 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-500 peer-checked:bg-blue-600"></div>
@@ -255,7 +255,7 @@ export default function UserList() {
           </div>
 
           {/* Admin Permission Toggle */}
-          <div className="flex items-center justify-between border border-gray-700 rounded-lg px-4 py-3">
+          <div className="flex items-center justify-start border border-gray-700 rounded-lg px-4 py-3">
           <label className="relative inline-flex items-center cursor-pointer mr-4">
               <input type="checkbox" value="" className="sr-only peer" />
               <div className="w-11 h-6 bg-gray-600 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-500 peer-checked:bg-blue-600"></div>

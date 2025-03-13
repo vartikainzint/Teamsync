@@ -25,24 +25,29 @@ const CalendarComponent = () => {
 
   const handleAddEvent = () => {
     if (newEventTitle.trim() !== "") {
-      setEvents([...events, { title: newEventTitle, start: newEventDate, end: newEventDate, allDay: true }]);
+      setEvents([
+        ...events,
+        { title: newEventTitle, start: newEventDate, end: newEventDate, allDay: true },
+      ]);
       setModalOpen(false);
       setNewEventTitle("");
     }
   };
 
   return (
-    <div className="relative p-6 bg-gray-900 min-h-screen text-white">
+    <div className="relative p-4 md:p-6 bg-gray-900 min-h-screen text-white">
       {/* Add Event Button */}
-      <button
-        className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
-        onClick={() => setModalOpen(true)}
-      >
-        + Add Event
-      </button>
+      <div className="flex justify-end mb-4">
+        <button
+          className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
+          onClick={() => setModalOpen(true)}
+        >
+          + Add Event
+        </button>
+      </div>
 
       {/* Calendar */}
-      <div className="mt-6 bg-gray-800 p-5 rounded-xl shadow-lg">
+      <div className="calendar-wrapper bg-gray-800 p-3 md:p-5 rounded-xl shadow-lg">
         <Calendar
           localizer={localizer}
           events={events}
@@ -56,7 +61,9 @@ const CalendarComponent = () => {
           onNavigate={(newDate) => setDate(newDate)}
           selectable
           style={{
-            height: "75vh",
+            minHeight: "60vh",
+            maxHeight: "75vh",
+            width: "100%",
             color: "white",
             backgroundColor: "#111827",
             padding: "10px",
@@ -67,8 +74,8 @@ const CalendarComponent = () => {
 
       {/* Modal for Adding Event */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-xl w-96 border border-gray-700">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 px-4">
+          <div className="bg-gray-800 p-5 md:p-6 rounded-lg shadow-xl w-full max-w-md border border-gray-700">
             <h2 className="text-lg font-semibold mb-4 text-white">Add New Event</h2>
             <input
               type="text"
@@ -85,7 +92,7 @@ const CalendarComponent = () => {
             />
             <div className="flex justify-end space-x-4 mt-6">
               <button
-                className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
+                className="text-gray-400 font-semibold px-4 py-2 bg-gray-700 border border-gray-600 rounded hover:bg-gray-600 transition"
                 onClick={() => setModalOpen(false)}
               >
                 Cancel
@@ -101,7 +108,7 @@ const CalendarComponent = () => {
         </div>
       )}
 
-      {/* Dark mode styling for datepicker */}
+      {/* Responsive & Dark Mode Styling */}
       <style jsx>{`
         :global(.react-datepicker) {
           background-color: #1f2937 !important;
@@ -120,6 +127,26 @@ const CalendarComponent = () => {
         }
         :global(.react-datepicker__day--keyboard-selected) {
           background-color: #1d4ed8 !important;
+        }
+
+        @media (max-width: 768px) {
+          .calendar-wrapper {
+            padding: 10px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .calendar-wrapper {
+            padding: 5px;
+          }
+
+          :global(.rbc-calendar) {
+            font-size: 12px;
+          }
+
+          :global(.rbc-toolbar) {
+            flex-wrap: wrap;
+          }
         }
       `}</style>
     </div>

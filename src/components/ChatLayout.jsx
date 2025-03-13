@@ -45,7 +45,7 @@ const ChatLayout = () => {
         <div className="p-6 border-b bg-white shadow-sm">
           <h2 className="text-xl font-bold text-gray-800">General room</h2>
           <p className="text-sm text-gray-500 mt-1">
-            Welcome to the general chat room for eve3ve! Connect, share, and engage
+            Welcome to the general chat room for Org name! Connect, share, and engage
             with your team beyond emails. Enjoy the conversation!
           </p>
         </div>

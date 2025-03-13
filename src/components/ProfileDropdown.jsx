@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import SettingsModal from "./SettingsModal";
+import SetStatusModal from "./SetStatusModal"; // Import modal
 
 export default function ProfileDropdown({ onClose }) {
   const dropdownRef = useRef(null);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // State for modal
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isStatusModalOpen, setIsStatusModalOpen] = useState(false); // State for Set Status modal
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -21,7 +23,7 @@ export default function ProfileDropdown({ onClose }) {
   const menuItems = [
     { text: "Set a status", shortcut: "Ctrl + Shift + Y" },
     { text: "Enter a command", shortcut: "Ctrl + K" },
-    { text: "Settings", shortcut: "Ctrl + ," }, // Target item to open modal
+    { text: "Settings", shortcut: "Ctrl + ," },
     { text: "Analytics", shortcut: "Ctrl + Shift + A" },
     { text: "Contacts", shortcut: "Ctrl + Shift + ." },
     { text: "Responses", shortcut: "Ctrl + Shift + O" },
@@ -38,9 +40,11 @@ export default function ProfileDropdown({ onClose }) {
   // Handle item click
   const handleItemClick = (item) => {
     if (item.text === "Settings") {
-      setIsSettingsOpen(true); // Open modal when clicking Settings
+      setIsSettingsOpen(true);
+    } else if (item.text === "Set a status") {
+      setIsStatusModalOpen(true); // Open Set Status modal
     } else {
-      onClose(); // Close dropdown for other items (optional behavior)
+      onClose(); // Close dropdown for other items
     }
   };
 
@@ -56,7 +60,7 @@ export default function ProfileDropdown({ onClose }) {
           ) : (
             <div
               key={index}
-              onClick={() => handleItemClick(item)} // Click handler
+              onClick={() => handleItemClick(item)}
               className={`flex justify-between items-center px-3 py-2 rounded-lg cursor-pointer transition-colors ${
                 item.danger
                   ? "text-red-500 hover:bg-red-600/20"
@@ -75,7 +79,13 @@ export default function ProfileDropdown({ onClose }) {
       {/* Settings Modal */}
       <SettingsModal
         isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)} // Close modal
+        onClose={() => setIsSettingsOpen(false)}
+      />
+
+      {/* Set a Status Modal */}
+      <SetStatusModal
+        isOpen={isStatusModalOpen}
+        onClose={() => setIsStatusModalOpen(false)}
       />
     </>
   );

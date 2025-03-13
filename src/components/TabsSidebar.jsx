@@ -23,9 +23,9 @@ export default function TabsSidebar({ activeTab, setActiveTab }) {
   ];
 
   return (
-    <div className="w-64 border-r p-4 overflow-y-auto h-screen space-y-4">
+    <div className="p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 h-full">
       {sections.map((section, idx) => (
-        <div key={idx}>
+        <div key={idx} className="mb-4">
           {section.title && (
             <div className="text-gray-500 uppercase text-xs mb-2 px-2">
               {section.title}
@@ -38,12 +38,12 @@ export default function TabsSidebar({ activeTab, setActiveTab }) {
               className={`p-2 rounded-lg cursor-pointer mb-1 ${
                 activeTab === tab
                   ? "bg-blue-500 text-white"
-                  : "hover:bg-gray-100 text-gray-700"
+                  : "hover:bg-gray-700 text-gray-300"
               } flex items-center justify-between`}
             >
               {tab}
               {tab === "Users" && (
-                <span className="text-gray-400">+</span> // Icon as seen in Users
+                <span className="text-gray-400 ml-2">+</span> // Icon for "Users"
               )}
             </div>
           ))}

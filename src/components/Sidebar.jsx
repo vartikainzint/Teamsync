@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Inbox, CheckSquare, Calendar, List, Plus } from "lucide-react";
+import {
+  Inbox,
+  CheckSquare,
+  Calendar,
+  List,
+  Plus,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
 import profileImage from "../assets/images/img-sharedinbox.png";
 import SidebarItem from "./SidebarItem";
 import ProfileDropdown from "./ProfileDropdown";
@@ -14,33 +22,29 @@ export default function Sidebar({
   addOrganization,
   selectedOrganization,
   setSelectedOrganization,
+  setSidebarOpen, // NEW PROP to control sidebar visibility
 }) {
   const [dropdowns, setDropdowns] = useState({
     profile: false,
     plus: false,
   });
   const [showOrgModal, setShowOrgModal] = useState(false);
+  const [openTeams, setOpenTeams] = useState({});
+  const [openTeamInboxes, setOpenTeamInboxes] = useState({});
 
   const profileDropdownRef = useRef(null);
   const plusDropdownRef = useRef(null);
 
-  // ✅ Handle outside clicks to close dropdowns
+  // Close dropdowns on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        profileDropdownRef.current &&
-        !profileDropdownRef.current.contains(event.target)
-      ) {
+      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
         setDropdowns((prev) => ({ ...prev, profile: false }));
       }
-      if (
-        plusDropdownRef.current &&
-        !plusDropdownRef.current.contains(event.target)
-      ) {
+      if (plusDropdownRef.current && !plusDropdownRef.current.contains(event.target)) {
         setDropdowns((prev) => ({ ...prev, plus: false }));
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
@@ -52,6 +56,13 @@ export default function Sidebar({
     { text: "All", icon: List, count: 0 },
   ];
 
+  // Handle selecting a tab and closing sidebar
+  const handleSelectTab = (text) => {
+    setSelectedTab(text);
+    setCalendarVisible(text === "Calendars");
+    if (setSidebarOpen) setSidebarOpen(false); // Close sidebar if function is provided
+  };
+
   const toggleDropdown = (key) => {
     setDropdowns((prev) => ({
       ...prev,
@@ -59,19 +70,24 @@ export default function Sidebar({
     }));
   };
 
-  const handleSelectTab = (text) => {
-    setSelectedTab(text);
-    if (text === "Calendars" && setCalendarVisible) {
-      setCalendarVisible(true);
-    }
+  const toggleTeam = (teamName) => {
+    setOpenTeams((prev) => ({
+      ...prev,
+      [teamName]: !prev[teamName],
+    }));
+  };
+
+  const toggleTeamInbox = (teamName) => {
+    setOpenTeamInboxes((prev) => ({
+      ...prev,
+      [teamName]: !prev[teamName],
+    }));
   };
 
   return (
-    <aside className="w-64 p-4 bg-gray-900 min-h-screen flex flex-col shadow-lg relative overflow-visible text-white">
-      
-      {/* Header Section */}
-      <div className="relative flex items-center mb-6 justify-end space-x-2">
-        {/* Profile Dropdown */}
+    <aside className="w-64 p-4 bg-gray-900 min-h-screen flex flex-col shadow-lg relative text-white">
+      {/* Header with Profile and Plus button */}
+      <div className="relative flex items-center justify-end mb-6">
         <div className="relative" ref={profileDropdownRef}>
           <img
             src={profileImage}
@@ -81,16 +97,15 @@ export default function Sidebar({
           />
           {dropdowns.profile && (
             <ProfileDropdown
-              onClose={() =>
-                setDropdowns((prev) => ({ ...prev, profile: false }))
-              }
+              onClose={() => setDropdowns((prev) => ({ ...prev, profile: false }))}
             />
           )}
         </div>
-        {/* Plus Dropdown */}
+
         <div className="relative" ref={plusDropdownRef}>
           <Plus
-            className="cursor-pointer bg-gray-800 border border-gray-600 rounded p-1 text-white"
+            size={24}
+            className="cursor-pointer ml-2 bg-gray-800 border border-gray-600 rounded p-1 text-white"
             onClick={() => toggleDropdown("plus")}
           />
           {dropdowns.plus && (
@@ -103,7 +118,7 @@ export default function Sidebar({
         </div>
       </div>
 
-      {/* Sidebar Navigation */}
+      {/* Main Navigation */}
       <nav className="flex-1 space-y-1">
         {menuItems.map(({ text, icon: Icon, count }) => (
           <SidebarItem
@@ -113,43 +128,82 @@ export default function Sidebar({
             count={count}
             active={selectedTab === text}
             onClick={() => handleSelectTab(text)}
-            className="hover:bg-gray-700 rounded"
-            activeClass="bg-gray-800 text-white font-semibold"
           />
         ))}
-      </nav>
 
-      {/* Organizations List */}
-      <div className="mt-6 pt-4 border-t border-gray-700">
-        <h3 className="text-sm font-semibold text-gray-400 mb-2">
-          Organizations
-        </h3>
-        {organizations.length > 0 ? (
-          organizations.map((org, index) => (
-            <div
-              key={index}
-              onClick={() => setSelectedOrganization(org)}
-              className={`px-2 py-1 rounded cursor-pointer ${
-                selectedOrganization === org
-                  ? "bg-blue-600 text-white font-semibold"
-                  : "hover:bg-gray-700 text-gray-300"
-              }`}
-            >
-              {org}
-            </div>
-          ))
-        ) : (
-          <div className="text-gray-500 italic text-sm">
-            No organizations found.
+        {/* Extra Actions */}
+        <div className="p-2">
+          <div className="text-gray-400 text-sm flex items-center cursor-pointer hover:text-white">
+            <Plus size={14} />
+            <span>Pin to sidebar</span>
           </div>
-        )}
-      </div>
+        </div>
+
+        {/* Team Spaces Section */}
+        <div className="pt-4">
+          <h3 className="text-sm font-semibold text-gray-400 mb-2">Team Spaces</h3>
+
+          {["Marketing Team", "Development Team"].map((team) => (
+            <div key={team} className="mb-2">
+              <div
+                onClick={() => toggleTeam(team)}
+                className="flex items-center justify-between p-2 rounded-lg cursor-pointer relative transition-colors hover:bg-gray-700 text-gray-300"
+              >
+                <span className="text-sm">{team}</span>
+                {openTeams[team] ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
+              </div>
+
+              {openTeams[team] && (
+                <div className="ml-4 mt-1 space-y-1">
+                  <div
+                    className={`flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-700 ${
+                      selectedTab === `${team}-Inbox` ? "bg-gray-700 text-white" : "text-gray-300"
+                    }`}
+                    onClick={() => toggleTeamInbox(team)}
+                  >
+                    <div className="flex items-center">
+                      <Inbox size={16} className="mr-2" />
+                      <span className="text-sm">Inbox</span>
+                    </div>
+                    {openTeamInboxes[team] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                  </div>
+
+                  {openTeamInboxes[team] && (
+                    <div className="ml-4 space-y-1">
+                      {["Assigned to me", "All"].map((subItem) => (
+                        <SidebarItem
+                          key={`${team}-Inbox-${subItem}`}
+                          text={subItem}
+                          icon={<Inbox size={14} />}
+                          active={selectedTab === `${team}-Inbox-${subItem}`}
+                          onClick={() => handleSelectTab(`${team}-Inbox-${subItem}`)}
+                        />
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Team Task */}
+                  <div
+                    className="flex items-center justify-between p-2 rounded-lg cursor-pointer transition-colors hover:bg-gray-700 text-gray-300"
+                    onClick={() => handleSelectTab(`${team}-Task`)}
+                  >
+                    <div className="flex items-center">
+                      <CheckSquare size={16} className="mr-2" />
+                      <span className="text-sm">Task</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </nav>
 
       {/* Create Organization Button */}
       <div className="mt-auto pt-4">
         <button
           onClick={() => setShowOrgModal(true)}
-          className="text-blue-400 font-medium px-2 py-1 hover:underline"
+          className="w-full text-center text-blue-400 font-medium px-2 py-1 hover:underline"
         >
           + Create an organization
         </button>

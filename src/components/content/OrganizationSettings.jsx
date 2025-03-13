@@ -8,7 +8,7 @@ export default function OrganizationSettings() {
   const [inactivity, setInactivity] = useState({ days: 0, hours: 0, minutes: 0 });
 
   return (
-    <div className="max-w-4xl mx-auto bg-gray-900 rounded-2xl shadow-lg p-6 sm:p-10 space-y-10 text-white">
+    <div className="max-w-6xl mx-auto bg-gray-900 rounded-2xl shadow-lg p-4 sm:p-6 md:p-10 space-y-10 text-white w-full">
 
       {/* General */}
       <div className="space-y-6">

@@ -52,20 +52,20 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 dark:bg-opacity-80 flex items-center justify-center z-50 px-4">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-xl w-96 border border-gray-700  rounded-2xl shadow-xl w-full max-w-2xl relative p-8 overflow-hidden">
+    <div className="fixed inset-0 bg-black bg-opacity-70 dark:bg-opacity-80 flex items-center justify-center z-50 p-2 sm:p-4">
+      <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg md:max-w-2xl relative p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[90vh]">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 text-gray-500 hover:text-gray-300 transition"
         >
-          <X size={24} />
+          <X size={22} />
         </button>
 
         {/* Step 1: Company Name */}
         {step === 1 && (
           <>
-            <h2 className="text-3xl font-semibold mb-8 text-center text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-center text-white">
               Create Organization
             </h2>
             <input
@@ -73,13 +73,13 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
               placeholder="Enter organization name"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
-              className="w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6"
+              className="w-full border border-gray-600 bg-gray-700 text-gray-100 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6"
             />
             <div className="flex justify-center">
               <button
                 disabled={!companyName.trim()}
                 onClick={() => setStep(2)}
-                className="text-blue-400 font-medium px-2 py-1 hover:underline"
+                className="text-blue-400 font-semibold px-6 py-2 bg-gray-700 border border-gray-600 rounded-lg hover:bg-gray-600 transition w-full sm:w-auto"
               >
                 Next
               </button>
@@ -90,15 +90,15 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
         {/* Step 2: Business Hours & Inactivity */}
         {step === 2 && (
           <>
-            <h2 className="text-3xl font-semibold mb-6 text-center text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6 text-center text-white">
               Business Hours
             </h2>
 
             {/* Weekdays */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 max-h-60 overflow-y-auto border border-gray-200 dark:border-gray-700 p-4 rounded-lg mb-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-48 sm:max-h-56 overflow-y-auto border border-gray-600 p-3 rounded-lg mb-4 sm:mb-6">
               {Object.keys(businessHours).map((day) => (
                 <div key={day} className="space-y-1">
-                  <label className="flex items-center gap-2 font-medium text-gray-700 dark:text-gray-200">
+                  <label className="flex items-center gap-2 font-medium text-gray-300">
                     <input
                       type="checkbox"
                       checked={businessHours[day].active}
@@ -115,7 +115,7 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
                         onChange={(e) =>
                           handleBusinessHourChange(day, "from", e.target.value)
                         }
-                        className="w-full border rounded-md px-2 py-1 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                        className="w-1/2 border rounded-md px-2 py-1 bg-gray-700 border-gray-600 text-gray-100"
                       />
                       <input
                         type="time"
@@ -123,7 +123,7 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
                         onChange={(e) =>
                           handleBusinessHourChange(day, "to", e.target.value)
                         }
-                        className="w-full border rounded-md px-2 py-1 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                        className="w-1/2 border rounded-md px-2 py-1 bg-gray-700 border-gray-600 text-gray-100"
                       />
                     </div>
                   )}
@@ -132,11 +132,11 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
             </div>
 
             {/* Inactivity Period */}
-            <div className="mt-4">
-              <h3 className="font-semibold mb-2 text-white">
+            <div className="mt-3">
+              <h3 className="font-semibold mb-2 text-white text-center sm:text-left">
                 Inactivity Period (Auto Logout)
               </h3>
-              <div className="flex gap-3">
+              <div className="flex gap-3 flex-wrap justify-center sm:justify-start">
                 {["days", "hours", "minutes"].map((field) => (
                   <input
                     key={field}
@@ -144,7 +144,7 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
                     placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
                     value={inactivity[field]}
                     onChange={(e) => handleInactivityChange(field, e.target.value)}
-                    className="w-20 border rounded-md px-2 py-1 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100"
+                    className="w-24 border rounded-md px-2 py-1 bg-gray-700 border-gray-600 text-gray-100"
                     min="0"
                   />
                 ))}
@@ -152,16 +152,16 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8">
+            <div className="flex flex-col sm:flex-row justify-between gap-4 mt-6 sm:mt-8">
               <button
                 onClick={() => setStep(1)}
-                className="text-blue-400 font-medium px-2 py-1 hover:underline"
+                className="text-blue-400 font-semibold px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg hover:bg-gray-600 transition w-full"
               >
                 Back
               </button>
               <button
                 onClick={handleCreateOrganization}
-                className="text-blue-400 font-medium px-2 py-1 hover:underline"
+                className="text-blue-400 font-semibold px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg hover:bg-gray-600 transition w-full"
               >
                 Create Organization
               </button>

@@ -83,11 +83,11 @@ export default function TaskPanel() {
 
             {/* Status Change Dropdown */}
             {openDropdown === task.id && (
-              <div className="absolute left-0 mt-2 bg-white border rounded shadow-lg z-10 w-40">
+              <div className="absolute left-0 mt-2 bg-gray-800 border rounded shadow-lg z-10 w-40">
                 {Object.keys(statusColors).map((s) => (
                   <div
                     key={s}
-                    className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+                    className="flex text-sm justify-between items-center p-2 hover:bg-gray-100 cursor-pointer text-gray-300 hover:bg-gray-700"
                     onClick={() => handleStatusChange(task.id, s)}
                   >
                     {s}
@@ -103,7 +103,7 @@ export default function TaskPanel() {
       ));
 
   return (
-    <div className="mx-auto p-6">
+    <div className="mx-auto">
       {/* Search Input */}
       <div className="flex items-center bg-gray-100 p-3 rounded-lg mb-4">
         <Search size={18} className="text-gray-500" />
@@ -126,7 +126,7 @@ export default function TaskPanel() {
           >
             <div className="flex items-center space-x-2">
               <p className="text-sm font-semibold">{status}</p>
-              <span className="text-xs bg-gray-200 px-2 py-1 rounded-full">
+              <span className="text-xs border px-2 py-1 rounded-full">
                 {filteredTasks.filter((task) => task.status === status).length}
               </span>
               <ChevronDown
@@ -139,14 +139,15 @@ export default function TaskPanel() {
 
             {/* Add Task Button */}
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowInput({ ...showInput, [status]: !showInput[status] });
-              }}
-              className="p-1 rounded-full bg-blue-500 hover:bg-blue-600"
-            >
-              <Plus size={16} color="white" />
-            </button>
+  onClick={(e) => {
+    e.stopPropagation();
+    setShowInput({ ...showInput, [status]: !showInput[status] });
+  }}
+  className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition"
+>
+  <Plus size={16} />
+</button>
+
           </div>
 
           {/* Task List */}

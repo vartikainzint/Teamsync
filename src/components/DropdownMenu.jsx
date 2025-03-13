@@ -15,7 +15,7 @@ export default function DropdownMenu({ setDropdownOpen }) {
         {menuItems.map(({ text, icon: Icon, shortcut, submenu }) => (
           <li
             key={text}
-            className="flex justify-between items-center p-2 hover:bg-gray-100 cursor-pointer rounded-md"
+            className="flex text-sm justify-between items-center p-2 hover:bg-gray-100 cursor-pointer rounded-md text-gray-300 hover:bg-gray-700"
             onClick={() => setDropdownOpen(false)}
           >
             <div className="flex items-center space-x-2">
