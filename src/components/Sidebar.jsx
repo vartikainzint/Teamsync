@@ -109,10 +109,19 @@ export default function Sidebar({
             onClick={() => toggleDropdown("plus")}
           />
           {dropdowns.plus && (
-            <DropdownMenu
+              <DropdownMenu
               setDropdownOpen={(value) =>
                 setDropdowns((prev) => ({ ...prev, plus: value }))
               }
+              onAction={(action) => {
+                if (action === "new-email") {
+                  setSelectedTab("NewEmail"); // Set tab to NewEmail when clicking "New email"
+                }
+                if (action === "new-conversation") {
+                  setSelectedTab("NewConversation"); // Set tab to NewEmail when clicking "New email"
+                }
+                // You can handle other actions here as well if needed
+              }}
             />
           )}
         </div>
