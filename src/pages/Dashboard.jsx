@@ -102,7 +102,7 @@ const Dashboard = () => {
         </div>
 
         {/* Main Content Rendering */}
-        <div className="p-4 space-y-4">
+        <div className="h-full space-y-4">
           {isNewMail ? (
             // ✅ Render New Email component
             <NewEmail setIsNewMail={setIsNewMail} />
@@ -110,7 +110,7 @@ const Dashboard = () => {
             // ✅ Render tab-based content
             <>
             {selectedTab === "Inbox" && (
-  <div className="flex h-[calc(100vh-80px)]">
+  <div className="flex h-full">
     <EmailList
       conversations={conversations}
       setIsNewMail={setIsNewMail}
@@ -120,7 +120,7 @@ const Dashboard = () => {
 )}
 
 {selectedTab === "NewEmail" && (
-  <div className="flex h-[calc(100vh-80px)] w-full">
+  <div className="flex h-full w-full">
         <EmailList
       conversations={conversations}
       setIsNewMail={setIsNewMail}
@@ -129,7 +129,7 @@ const Dashboard = () => {
   </div>
 )}
 {selectedTab === "NewConversation" && (
-  <div className="flex h-[calc(100vh-80px)] w-full">
+  <div className="flex h-full w-full">
         <EmailList
       conversations={conversations}
       setIsNewMail={setIsNewMail}
