@@ -1,10 +1,14 @@
-// components/EmailList.jsx
-import { useState } from "react";
 import { Search } from "lucide-react";
 
-export default function EmailList({ conversations, setIsNewMail }) {
+export default function EmailList({
+  conversations,
+  setIsNewMail,
+  setSelectedConversation,
+  setSelectedTab // Make sure this is passed from parent
+}) {
   return (
     <div className="w-full md:w-1/3 border-r border-gray-700 flex flex-col max-h-full">
+      
       {/* Search Bar */}
       <div className="flex items-center p-2">
         <div className="flex items-center px-4 py-2 rounded-lg bg-gray-800 w-full">
@@ -43,9 +47,21 @@ export default function EmailList({ conversations, setIsNewMail }) {
         {conversations.map((conv) => (
           <div
             key={conv.id}
+            onClick={() => {
+              setSelectedConversation(conv); // Set clicked conversation
+              setSelectedTab("NewConversation"); // Switch to NewConversation tab
+              setIsNewMail(false); // Ensure NewEmail is NOT opened
+            }}
             className="p-3 border-b border-gray-700 hover:bg-gray-800 cursor-pointer"
           >
-            <p className="font-semibold">{conv.user}</p>
+            <div className="flex justify-between items-center">
+              <p className="font-semibold">{conv.user}</p>
+              {conv.private && (
+                <span className="text-xs bg-red-600 text-white px-2 py-0.5 rounded-full">
+                  Private
+                </span>
+              )}
+            </div>
             <p className="text-sm text-gray-400 truncate">{conv.message}</p>
             <p className="text-xs text-gray-500">{conv.date}</p>
           </div>

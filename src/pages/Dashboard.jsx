@@ -6,48 +6,45 @@ import EmailList from "../components/EmailList";
 import CalendarComponent from "../components/CalendarComponent";
 import ChatLayout from "../components/ChatLayout";
 import NewConversation from "../components/NewConversation";
-import NewEmail from "../components/NewEmail"; // Ensure this component exists and is working
+import NewEmail from "../components/NewEmail";
 import { Menu } from "lucide-react";
 
 const Dashboard = () => {
   const [selectedTab, setSelectedTab] = useState("Inbox");
   const [calendarVisible, setCalendarVisible] = useState(false);
-  const [isNewMail, setIsNewMail] = useState(false); // To show "New Email" form
+  const [isNewMail, setIsNewMail] = useState(false);
   const [organizations, setOrganizations] = useState(["Default Organization"]);
   const [selectedOrganization, setSelectedOrganization] = useState(null);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [selectedConversation, setSelectedConversation] = useState(null);
 
-  // Manage conversations
   const [conversations, setConversations] = useState([
     { id: 1, user: "You", message: "New conversation", date: "Tuesday" },
     { id: 2, user: "You", message: "Another conversation", date: "Wednesday" },
   ]);
 
-  // Add organization
+  // Add new organization
   const addOrganization = (orgName) => {
-    setOrganizations((prev) => {
-      const updated = [...prev, orgName];
-      console.log("Updated Organizations: ", updated);
-      return updated;
-    });
+    setOrganizations((prev) => [...prev, orgName]);
   };
 
-  // Tab selection handler
+  // Handle Tab Switching
   const handleTabSelect = (tab) => {
     setSelectedTab(tab);
-    setIsNewMail(false); // Close NewEmail when switching tabs
-    setMobileSidebarOpen(false); // Close mobile sidebar if open
+    setIsNewMail(false); // Reset New Email form on tab change
+    setMobileSidebarOpen(false); // Close sidebar on mobile
+    setSelectedConversation(null); // Reset selected conversation on tab change
   };
 
   return (
     <div className="flex h-screen overflow-hidden bg-gray-900 text-gray-200 relative">
-      
+
       {/* Mobile Sidebar Overlay */}
       {mobileSidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-20"
           onClick={() => setMobileSidebarOpen(false)}
-        ></div>
+        />
       )}
 
       {/* Mobile Sidebar */}
@@ -84,9 +81,9 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <div className="flex-1 overflow-y-auto relative">
-        
+
         {/* Mobile Header */}
         <div className="md:hidden flex items-center justify-between px-4 py-3 border-b border-gray-700 bg-gray-800 sticky top-0 z-10">
           <button
@@ -101,52 +98,50 @@ const Dashboard = () => {
           <div></div>
         </div>
 
-        {/* Main Content Rendering */}
-        <div className="h-full space-y-4">
-          {isNewMail ? (
-            // ✅ Render New Email component
-            <NewEmail setIsNewMail={setIsNewMail} />
-          ) : (
-            // ✅ Render tab-based content
-            <>
-            {selectedTab === "Inbox" && (
-  <div className="flex h-full">
-    <EmailList
-      conversations={conversations}
-      setIsNewMail={setIsNewMail}
-    />
-    <InBox />
-  </div>
-)}
+        {/* Content Area */}
+        <div className="h-full space-y-4 p-4">
 
-{selectedTab === "NewEmail" && (
-  <div className="flex h-full w-full">
-        <EmailList
-      conversations={conversations}
-      setIsNewMail={setIsNewMail}
-    />
-    <NewEmail />
-  </div>
-)}
-{selectedTab === "NewConversation" && (
-  <div className="flex h-full w-full">
-        <EmailList
-      conversations={conversations}
-      setIsNewMail={setIsNewMail}
-    />
-    <NewConversation />
-  </div>
-)}
+          {/* Show Email/Conversation Layout */}
+          {(selectedTab === "Inbox" || selectedTab === "NewEmail" || selectedTab === "NewConversation") && (
+            <div className="flex h-full">
+              
+              {/* Email List on Left */}
+              <EmailList
+                conversations={conversations}
+                setIsNewMail={setIsNewMail}
+                setSelectedConversation={setSelectedConversation}
+                setSelectedTab={setSelectedTab} // to switch tab dynamically if needed
+              />
 
-              {selectedTab === "Tasks" && <TaskPanel />}
-              {selectedTab === "Calendars" && <CalendarComponent />}
-              {selectedTab === "All" && (
-                <div className="space-y-4">
-                  <ChatLayout />
-                </div>
-              )}
-            </>
+              {/* Right side Content */}
+              <div className="flex-1">
+                {/* Conditional Content */}
+                {isNewMail ? (
+                  <NewEmail setIsNewMail={setIsNewMail} />
+                ) : selectedTab === "NewEmail" ? (
+                  <NewEmail setIsNewMail={setIsNewMail} />
+                ) : selectedTab === "NewConversation" ? (
+                  <NewConversation selectedConversation={selectedConversation} />
+                ) : (
+                  <InBox selectedConversation={selectedConversation} />
+                )}
+              </div>
+            </div>
           )}
+
+          {/* Tasks Tab */}
+          {selectedTab === "Tasks" && <TaskPanel />}
+
+          {/* Calendar Tab */}
+          {selectedTab === "Calendars" && <CalendarComponent />}
+
+          {/* All Tab */}
+          {selectedTab === "All" && (
+            <div className="space-y-4">
+              <ChatLayout />
+            </div>
+          )}
+
         </div>
       </div>
     </div>

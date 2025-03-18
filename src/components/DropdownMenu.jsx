@@ -26,7 +26,7 @@ export default function DropdownMenu({ setDropdownOpen, onAction }) {
     { text: "Account 2", action: "account-2" },
   ];
 
-  // Close menu on outside click
+  // Close menu and submenu on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -35,19 +35,21 @@ export default function DropdownMenu({ setDropdownOpen, onAction }) {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, [setDropdownOpen]);
 
   return (
     <div
       ref={menuRef}
-      className="w-60 bg-gray-800 z-50 rounded-md p-2 shadow-lg border border-gray-700 relative sidebar-div text-sm"
+      className="w-60 bg-gray-800 z-50 rounded-md p-2 shadow-lg border border-gray-700 relative text-sm sidebar-div"
     >
       <ul className="space-y-1">
         {menuItems.map(({ text, icon: Icon, submenu, action }) => (
           <li
             key={text}
-            className="flex justify-between items-center p-2 hover:bg-gray-700 cursor-pointer rounded-md text-gray-300 relative"
+            className="flex justify-between items-center p-2 hover:bg-gray-700 cursor-pointer rounded-md text-gray-300"
             onClick={(e) => {
               e.stopPropagation();
               if (submenu) {
@@ -55,6 +57,7 @@ export default function DropdownMenu({ setDropdownOpen, onAction }) {
               } else {
                 onAction(action);
                 setDropdownOpen(false);
+                setShowSubMenu(false);
               }
             }}
           >

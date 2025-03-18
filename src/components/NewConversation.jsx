@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Bell, Archive, Trash2, MoreHorizontal, UserPlus, Check } from "lucide-react";
-
+import PrivateComments from "./PrivateComments";
 export default function EmailConversationCard() {
   const [subject, setSubject] = useState("Conversation");
+  const [showMenu, setShowMenu] = useState(false); // Toggle state for dropdown
 
   // Example action handler
   const handleAction = (action) => {
@@ -10,7 +11,7 @@ export default function EmailConversationCard() {
   };
 
   return (
-    <div className="flex flex-col bg-gray dark:bg-gray-900 text-white-800 dark:text-white-200 rounded-md border border-gray-300 dark:border-gray-700 shadow-sm max-w-3xl mx-auto">
+    <div className="flex flex-col bg-gray dark:bg-gray-900 text-white-800 dark:text-white-200 rounded-md  border-gray-300 dark:border-gray-700 shadow-sm max-w-3xl mx-auto">
       
       {/* Toolbar Header */}
       <div className="flex justify-between items-center px-4 py-2 border-b border-gray-200 dark:border-gray-700">
@@ -107,9 +108,74 @@ export default function EmailConversationCard() {
               </div>
             </div>
           </div>
+          {/* Private message */}
+          <div className="flex items-start gap-2 p-4 relative">
+      {/* User Avatar */}
+      <img
+        src="https://placehold.co/40x40"
+        alt="User Avatar"
+        className="w-8 h-8 rounded-full object-cover"
+      />
 
+      {/* Message + Options */}
+      <div className="relative max-w-xs">
+        {/* Message Bubble */}
+        <div className="bg-blue-100 text-gray-800 px-4 py-2 rounded-lg rounded-bl-none">
+          hii
+        </div>
+
+        {/* Emoji, Reply, and Options (Interactive icons) */}
+        <div className="absolute top-0 right-0 flex items-center gap-1 translate-x-full ml-2">
+          <button className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-200">
+            😊
+          </button>
+          <button className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-200">
+            ↩️
+          </button>
+          <button
+            className="w-6 h-6 flex items-center justify-center rounded-full hover:bg-gray-200"
+            onClick={() => setShowMenu((prev) => !prev)} // Toggle dropdown on click
+          >
+            ⋯
+          </button>
+        </div>
+
+        {/* Dropdown Menu (Conditional rendering) */}
+        {showMenu && (
+          <div className="absolute right-0 mt-8 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+            <ul className="py-1 text-sm text-gray-700">
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100">Edit</a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100">Copy</a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100">Share</a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100">Add task</a>
+              </li>
+              <li>
+                <a href="#" className="block px-4 py-2 hover:bg-gray-100">Delete</a>
+              </li>
+            </ul>
+            {/* Timestamp */}
+            <div className="border-t border-gray-200 px-4 py-2 text-xs text-gray-500">
+              Mar 17, 2025, 2:32 PM
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
         </div>
       </div>
+      <div className="w-full h-full flex flex-col">
+      {/* Your other conversation components and UI */}
+
+      {/* Private Comments Component */}
+      <PrivateComments />
+    </div>
     </div>
   );
 }
