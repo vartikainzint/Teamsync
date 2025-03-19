@@ -35,7 +35,7 @@ export default function TabsSidebar({ activeTab, setActiveTab }) {
             <div
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`p-2 rounded-lg cursor-pointer mb-1 ${
+              className={`p-1 rounded-lg cursor-pointer text-sm mb-1 ${
                 activeTab === tab
                   ? "bg-blue-500 text-white"
                   : "hover:bg-gray-700 text-gray-300"
