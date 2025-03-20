@@ -7,6 +7,7 @@ import CalendarComponent from "../components/CalendarComponent";
 import ChatLayout from "../components/ChatLayout";
 import NewConversation from "../components/NewConversation";
 import NewEmail from "../components/NewEmail";
+import Room from "../components/Room";
 import { Menu } from "lucide-react";
 
 const Dashboard = () => {
