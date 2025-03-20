@@ -170,7 +170,7 @@ export default function EmailConversationCard() {
     </div>
         </div>
       </div>
-      <div className="w-full h-full flex flex-col">
+      <div className="w-full h-full flex flex-col mt-35">
       {/* Your other conversation components and UI */}
 
       {/* Private Comments Component */}

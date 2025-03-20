@@ -119,7 +119,7 @@ export default function NewEmail() {
           </div>
 
           {/* Email Body */}
-          <div className="min-h-[150px] max-h-[300px] overflow-auto">
+          <div className="min-h-[50px] max-h-[300px] overflow-auto">
             <textarea
               placeholder="Write your message..."
               value={body}
@@ -153,7 +153,7 @@ export default function NewEmail() {
       </div>
 
       {/* Private Comments Section */}
-      <div className="border-t border-gray-700 max-h-[200px] overflow-auto">
+      <div className=" max-h-[200px] overflow-auto mt-30">
         <PrivateComments />
       </div>
     </div>

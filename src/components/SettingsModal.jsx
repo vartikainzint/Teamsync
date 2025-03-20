@@ -9,7 +9,7 @@ import LoginSecurityContent from "./content/LoginSecurityContent";
 import OrganizationSettings from "./content/OrganizationSettings";
 import UserList from "./content/UserList";
 import CreateTeamSection from "./content/CreateTeamSection";
-
+import LabelSection from "./content/LabelSection";
 // Placeholder for tabs not yet implemented
 const Placeholder = ({ tab }) => (
   <div className="text-center text-gray-400 text-lg p-4">Content for "{tab}" coming soon!</div>
@@ -41,6 +41,7 @@ export default function SettingsModal({ isOpen, onClose }) {
       case "Teams":
         return <CreateTeamSection />;
       case "Labels":
+        return <LabelSection />;
       case "Rules":
       case "Signatures":
       case "Billing":
@@ -89,7 +90,7 @@ export default function SettingsModal({ isOpen, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 p-4 md:p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 max-h-full">
+        <div className="flex-1 p-4 md:p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 max-h-full">
           {renderContent()}
         </div>
       </div>
