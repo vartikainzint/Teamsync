@@ -3,7 +3,7 @@ import { MessageCircle } from "lucide-react";
 
 export default function InBox() {
   return (
-    <div className="flex-1 flex flex-col items-center justify-center p-4 text-gray-400 max-h-full overflow-auto">
+    <div className="flex-1 flex flex-col items-center justify-center p-4 mt-50 text-gray-400 max-h-full overflow-auto">
       <MessageCircle size={48} className="mb-4 text-gray-600" />
       <h2 className="text-xl font-semibold text-gray-200">Inbox</h2>
       <p className="text-sm">What goes into the Inbox?</p>
@@ -12,4 +12,5 @@ export default function InBox() {
       </button>
     </div>
   );
-}
+};
+

@@ -10,7 +10,7 @@ import {
   Smile,
   Plus,
 } from "lucide-react";
-import InviteUserModal from "../pages/InviteUserModal";
+import InviteUserModal from "./InviteUserModal";
 
 const socket = io("http://localhost:5001"); // Adjust for your backend
 
@@ -125,3 +125,4 @@ const Room = () => {
 };
 
 export default Room;
+ 

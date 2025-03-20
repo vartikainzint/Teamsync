@@ -10,28 +10,24 @@ import {
   Users,
 
 } from "lucide-react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOrganizations } from "../Redux/features/slice/orgSlice";
 import profileImage from "../assets/images/img-sharedinbox.png";
 import SidebarItem from "./SidebarItem";
 import ProfileDropdown from "./ProfileDropdown";
 import CreateOrganizationModal from "./CreateOrganizationModal";
 import DropdownMenu from "./DropdownMenu";
-import AddTaskModal from "./AddTaskModal"; // Import AddTaskModal
+import AddTaskModal from "./AddTaskModal";
 import AddCalendarModal from "./AddCalenderModal";
 
 export default function Sidebar({
   selectedTab,
   setSelectedTab,
   setCalendarVisible,
-  organizations,
   addOrganization,
-  selectedOrganization,
-  setSelectedOrganization,
   setSidebarOpen,
 }) {
-  const [dropdowns, setDropdowns] = useState({
-    profile: false,
-    plus: false,
-  });
+  const [dropdowns, setDropdowns] = useState({ profile: false, plus: false });
   const [showOrgModal, setShowOrgModal] = useState(false);
   const [showTaskModal, setShowTaskModal] = useState(false);
   const [showCalendar, setShowCalendarModal] = useState(false);
@@ -40,14 +36,27 @@ export default function Sidebar({
 
   const profileDropdownRef = useRef(null);
   const plusDropdownRef = useRef(null);
+  const dispatch = useDispatch();
+  const { organizations, loading, error } = useSelector((state) => state.org);
+  // console.log("organization data", organization);
 
-  // Close dropdowns on outside click
+  useEffect(() => {
+    dispatch(fetchOrganizations());
+  }, [dispatch]);
+  // console.log("loading organizations",organizations);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target)) {
+      if (
+        profileDropdownRef.current &&
+        !profileDropdownRef.current.contains(event.target)
+      ) {
         setDropdowns((prev) => ({ ...prev, profile: false }));
       }
-      if (plusDropdownRef.current && !plusDropdownRef.current.contains(event.target)) {
+      if (
+        plusDropdownRef.current &&
+        !plusDropdownRef.current.contains(event.target)
+      ) {
         setDropdowns((prev) => ({ ...prev, plus: false }));
       }
     };
@@ -69,24 +78,15 @@ export default function Sidebar({
   };
 
   const toggleDropdown = (key) => {
-    setDropdowns((prev) => ({
-      ...prev,
-      [key]: !prev[key],
-    }));
+    setDropdowns((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   const toggleTeam = (teamName) => {
-    setOpenTeams((prev) => ({
-      ...prev,
-      [teamName]: !prev[teamName],
-    }));
+    setOpenTeams((prev) => ({ ...prev, [teamName]: !prev[teamName] }));
   };
 
   const toggleTeamInbox = (teamName) => {
-    setOpenTeamInboxes((prev) => ({
-      ...prev,
-      [teamName]: !prev[teamName],
-    }));
+    setOpenTeamInboxes((prev) => ({ ...prev, [teamName]: !prev[teamName] }));
   };
 
   const handlePlusAction = (action) => {
@@ -96,41 +96,48 @@ export default function Sidebar({
     if (action === "new-email") setSelectedTab("NewEmail");
     if (action === "new-conversation") setSelectedTab("NewConversation");
     if (action === "new-event") setShowCalendarModal(true);
-
   };
 
   return (
-    <aside className="w-64 p-4 bg-gray-900 min-h-screen flex flex-col shadow-lg relative text-white">
-      {/* Header */}
-      <div className="relative flex items-center justify-end mb-6">
-        <div className="relative" ref={profileDropdownRef}>
+    <aside className="w-64 p-4 bg-gray-950 min-h-screen flex flex-col shadow-xl rounded-r-2xl text-white relative">
+      <div className="relative flex items-center mb-6">
+        <div className="relative mr-2" ref={profileDropdownRef}>
           <img
             src={profileImage}
             alt="Profile"
-            className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-700"
+            className="w-10 h-10 rounded-full cursor-pointer border border-gray-700 hover:ring-2 hover:ring-blue-400"
             onClick={() => toggleDropdown("profile")}
           />
           {dropdowns.profile && (
-            <ProfileDropdown onClose={() => setDropdowns((prev) => ({ ...prev, profile: false }))} />
+            <div className="fixed top-14 left-16 w-60 rounded-lg text-white shadow-lg z-50">
+              <ProfileDropdown
+                onClose={() =>
+                  setDropdowns((prev) => ({ ...prev, profile: false }))
+                }
+              />
+            </div>
           )}
         </div>
 
         <div className="relative" ref={plusDropdownRef}>
           <Plus
             size={24}
-            className="cursor-pointer ml-2 bg-gray-800 border border-gray-600 rounded p-1 text-white"
+            className="cursor-pointer bg-gray-800 border border-gray-700 rounded p-1 hover:bg-gray-700"
             onClick={() => toggleDropdown("plus")}
           />
           {dropdowns.plus && (
-            <DropdownMenu
-              setDropdownOpen={(value) => setDropdowns((prev) => ({ ...prev, plus: value }))}
-              onAction={handlePlusAction}
-            />
+            <div className="fixed top-14 left-20 w-65 rounded-lg text-white shadow-lg z-50">
+              <DropdownMenu
+                setDropdownOpen={(value) =>
+                  setDropdowns((prev) => ({ ...prev, plus: value }))
+                }
+                onAction={handlePlusAction}
+              />
+            </div>
           )}
         </div>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-1">
         {menuItems.map(({ text, icon: Icon, count }) => (
           <SidebarItem
@@ -144,71 +151,95 @@ export default function Sidebar({
         ))}
 
         <div className="p-2">
-          <div className="text-gray-400 text-sm flex items-center cursor-pointer hover:text-white">
+          <div className="text-gray-500 text-xs flex items-center cursor-pointer hover:text-white">
             <Plus size={14} />
-            <span>Pin to sidebar</span>
+            <span className="ml-1">Pin to sidebar</span>
           </div>
         </div>
 
-        {/* Team Section */}
         <div className="pt-4">
-          <h3 className="text-sm font-semibold text-gray-400 mb-2">Team Spaces</h3>
-          {["Marketing Team", "Development Team"].map((team) => (
-            <div key={team} className="mb-2">
-              <div
-                onClick={() => toggleTeam(team)}
-                className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-700 text-gray-300"
-              >
-                <span className="text-sm">{team}</span>
-                {openTeams[team] ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
-              </div>
+          <h3 className="text-xs font-semibold text-gray-500 mb-2 uppercase">
+            Team Spaces
+          </h3>
 
-              {openTeams[team] && (
-                <div className="ml-4 mt-1 space-y-1">
-                  <div
-                    onClick={() => toggleTeamInbox(team)}
-                    className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-700"
-                  >
-                    <div className="flex items-center text-sm">
-                      <Inbox size={16} className="mr-2" />
-                      Inbox
-                    </div>
-                    {openTeamInboxes[team] ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                  </div>
-                  {openTeamInboxes[team] &&
-                    ["Assigned to me", "All"].map((subItem) => (
-                      <SidebarItem
-                        key={`${team}-Inbox-${subItem}`}
-                        text={subItem}
-                        icon={<Inbox size={14} />}
-                        active={selectedTab === `${team}-Inbox-${subItem}`}
-                        onClick={() => handleSelectTab(`${team}-Inbox-${subItem}`)}
-                      />
-                    ))}
-                  <SidebarItem
-                    text="Task"
-                    icon={<CheckSquare size={16} />}
-                    active={selectedTab === `${team}-Task`}
-                    onClick={() => handleSelectTab(`${team}-Task`)}
-                  />
-                  <SidebarItem text="Room" icon={<Users size={16} />} active={selectedTab === `${team}-Rooms`} onClick={() => handleSelectTab(`${team}-Rooms`)} />
-
+          {loading ? (
+            <p className="text-gray-400 text-sm">Loading organizations...</p>
+          ) : organizations && organizations.length > 0 ? (
+            organizations.map((org) => (
+              <div key={org._id} className="mb-2">
+                <div
+                  onClick={() => toggleTeam(org.name)}
+                  className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-800 text-gray-300"
+                >
+                  <span className="text-sm">{org.name}</span>
+                  {openTeams[org.name] ? (
+                    <ChevronDown size={16} />
+                  ) : (
+                    <ChevronRight size={16} />
+                  )}
                 </div>
-              )}
-            </div>
-          ))}
+
+                {openTeams[org.name] && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    <div
+                      onClick={() => toggleTeamInbox(org.name)}
+                      className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-800"
+                    >
+                      <div className="flex items-center text-gray-400">
+                        <Inbox size={16} className="mr-2" /> Inbox
+                      </div>
+                      {openTeamInboxes[org.name] ? (
+                        <ChevronDown size={14} />
+                      ) : (
+                        <ChevronRight size={14} />
+                      )}
+                    </div>
+                    {openTeamInboxes[org.name] &&
+                      ["Assigned to me", "All"].map((subItem) => (
+                        <SidebarItem
+                          key={`${org.name}-Inbox-${subItem}`}
+                          text={subItem}
+                          icon={<Inbox size={14} />}
+                          active={
+                            selectedTab === `${org.name}-Inbox-${subItem}`
+                          }
+                          onClick={() =>
+                            handleSelectTab(`${org.name}-Inbox-${subItem}`)
+                          }
+                        />
+                      ))}
+
+                    <SidebarItem
+                      text="Task"
+                      icon={<CheckSquare size={16} />}
+                      active={selectedTab === `${org.name}-Task`}
+                      onClick={() => handleSelectTab(`${org.name}-Task`)}
+                    />
+                    <SidebarItem
+                      text="Room"
+                      icon={<CheckSquare size={16} />}
+                      active={selectedTab === `${org.name}-Room`}
+                      onClick={() => handleSelectTab(`${org.name}-Room`)}
+                    />
+                  </div>
+                )}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">
+              No organizations found for this user.
+            </p>
+          )}
         </div>
       </nav>
 
-      {/* Create Organization */}
       <button
         onClick={() => setShowOrgModal(true)}
-        className="w-full text-center text-blue-400 font-medium px-2 py-1 hover:underline"
+        className="w-full text-center text-blue-500 font-medium py-2 hover:underline text-sm border-t border-gray-700 mt-4"
       >
         + Create an organization
       </button>
 
-      {/* Modals */}
       {showOrgModal && (
         <CreateOrganizationModal
           isOpen={showOrgModal}
@@ -225,12 +256,12 @@ export default function Sidebar({
           }}
         />
       )}
-       {showCalendar && (
-       <AddCalendarModal
-       showCalendar={showCalendar}
-       setShowCalendarModal={setShowCalendarModal}
-       onAddCalendar={() => alert("Add calendar clicked!")}
-     />
+      {showCalendar && (
+        <AddCalendarModal
+          showCalendar={showCalendar}
+          setShowCalendarModal={setShowCalendarModal}
+          onAddCalendar={() => alert("Add calendar clicked!")}
+        />
       )}
     </aside>
   );

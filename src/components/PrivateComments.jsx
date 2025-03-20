@@ -14,7 +14,7 @@ const PrivateComments = () => {
   };
 
   return (
-    <div className="border-t border-gray-300 px-4 py-3 bg-gray">
+    <div className=" px-4 py-3 bg-gray">
       {/* Displaying private comments */}
       {privateComments.length > 0 && (
         <div className="space-y-2 mb-3">
@@ -30,7 +30,7 @@ const PrivateComments = () => {
       )}
 
       {/* Input field with icons */}
-      <div className="flex items-center border border-gray-300 rounded-3xl px-3 py-2 bg-gray-800 text-white">
+      <div className="flex items-center border border-gray-300 rounded-xl px-3 py-2 bg-gray-800 text-white">
         <input
           type="text"
           placeholder="Write private comment..."

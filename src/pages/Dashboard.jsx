@@ -100,7 +100,7 @@ const Dashboard = () => {
         </div>
 
         {/* Content Area */}
-        <div className="h-full space-y-4 p-4">
+        <div className="h-full space-y-4">
 
           {/* Show Email/Conversation Layout */}
           {(selectedTab === "Inbox" || selectedTab === "NewEmail" || selectedTab === "NewConversation") && (
@@ -135,6 +135,9 @@ const Dashboard = () => {
 
           {/* Calendar Tab */}
           {selectedTab === "Calendars" && <CalendarComponent />}
+
+          {/* Chat Tab */}
+          {selectedTab.includes("Room") && <Room />}
 
           {/* All Tab */}
           {selectedTab === "All" && (
