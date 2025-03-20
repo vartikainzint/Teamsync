@@ -26,7 +26,7 @@ const Help = () => {
       id: 'glossary',
       title: 'Glossary',
       icon: '📖',
-      description: 'Missive terms and definitions.',
+      description: 'teamsync terms and definitions.',
     },
     {
       id: 'team-inboxes',
@@ -38,7 +38,7 @@ const Help = () => {
       id: 'faq',
       title: 'FAQ',
       icon: '🙋🏻‍♀️',
-      description: 'Hundreds of questions and answers covering every aspect of Missive, from labels to pricing to assignment, etc.',
+      description: 'Hundreds of questions and answers covering every aspect of teamsync, from labels to pricing to assignment, etc.',
     },
     {
       id: 'aliases-signatures',
@@ -47,8 +47,8 @@ const Help = () => {
       description: 'Learn how to perfectly setup your aliases and signatures.',
     },
     {
-      id: 'missive-tips',
-      title: 'Missive Tips & Tricks',
+      id: 'teamsync-tips',
+      title: 'teamsync Tips & Tricks',
       icon: '🏓',
       description: 'Improve your email and chat game using these simple tricks.',
     },
@@ -68,19 +68,19 @@ const Help = () => {
       id: 'google-setup',
       title: 'Configuring Google',
       icon: '🔧',
-      description: 'Learn how to best setup Google to work with Missive.',
+      description: 'Learn how to best setup Google to work with teamsync.',
     },
     {
       id: 'learn-fast',
       title: 'Learn to be fast',
       icon: '💨',
-      description: 'Be more productive by learning the Command bar and Missive shortcuts.',
+      description: 'Be more productive by learning the Command bar and teamsync shortcuts.',
     },
     {
       id: 'video-tutorials',
       title: 'Video tutorials',
       icon: '🎥',
-      description: 'Short-format video resources to swiftly become a Missive pro.',
+      description: 'Short-format video resources to swiftly become a teamsync pro.',
     },
     {
       id: 'whatsapp',
@@ -90,9 +90,9 @@ const Help = () => {
     },
     {
       id: 'live-chat',
-      title: 'Missive Live Chat',
+      title: 'teamsync Live Chat',
       icon: '💬',
-      description: 'Missive Live Chat is the perfect way to interact with visitors from your website without creating additional silos of communication.',
+      description: 'teamsync Live Chat is the perfect way to interact with visitors from your website without creating additional silos of communication.',
     },
     {
       id: 'analytics',
@@ -122,19 +122,19 @@ const Help = () => {
       id: 'single-sign-on',
       title: 'Single Sign-On',
       icon: '🔐',
-      description: 'Manage your employees’ access to Missive via your Single Sign-On identity provider.',
+      description: 'Manage your employees’ access to teamsync via your Single Sign-On identity provider.',
     },
     {
       id: 'microsoft-setup',
       title: 'Configuring Microsoft',
       icon: '🔧',
-      description: 'Learn how to best setup Microsoft to work with Missive.',
+      description: 'Learn how to best setup Microsoft to work with teamsync.',
     },
     {
       id: 'developer-docs',
       title: 'Developer documentation',
       icon: '👨🏻‍💻',
-      description: 'Enrich your Missive experience with our APIs.',
+      description: 'Enrich your teamsync experience with our APIs.',
     },
     {
       id: 'custom-channels',
@@ -144,9 +144,9 @@ const Help = () => {
     },
     {
       id: 'gdpr',
-      title: 'Missive and GDPR',
+      title: 'teamsync and GDPR',
       icon: '🇪🇺',
-      description: 'Missive is fully compliant with the European Union GDPR privacy law.',
+      description: 'teamsync is fully compliant with the European Union GDPR privacy law.',
     },
   ];
 
@@ -203,8 +203,8 @@ const Help = () => {
         <p className="text-lg text-gray-600 mb-4" style={{ fontFamily: '"Tiempos Headline", "Times New Roman", sans-serif' }}>Can’t find your answer?</p>
         <p className="text-lg text-blue-600">
           Contact us at{' '}
-          <a href="mailto:support@missiveapp.com" className="font-semibold hover:underline">
-            support@missiveapp.com
+          <a href="mailto:support@teamsyncapp.com" className="font-semibold hover:underline">
+            support@teamsyncapp.com
           </a>
         </p>
       </div>

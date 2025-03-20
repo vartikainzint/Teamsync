@@ -8,6 +8,7 @@ export default function TaskPanel() {
     { id: 3, text: "Backend", status: "To do" },
     { id: 4, text: "Completed Task", status: "Closed" },
   ]);
+
   const [searchQuery, setSearchQuery] = useState("");
   const [openDropdown, setOpenDropdown] = useState(null);
   const [expandedSections, setExpandedSections] = useState({
@@ -25,6 +26,12 @@ export default function TaskPanel() {
     "In Progress": false,
     "Closed": false,
   });
+
+  const statusColors = {
+    "To do": "#9CA3AF",
+    "In Progress": "#3B82F6",
+    "Closed": "#10B981",
+  };
 
   const addTask = (status) => {
     if (newTasks[status].trim() !== "") {
@@ -44,16 +51,6 @@ export default function TaskPanel() {
     }));
   };
 
-  const filteredTasks = tasks.filter((task) =>
-    task.text.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const statusColors = {
-    "To do": "#9CA3AF",
-    "In Progress": "#3B82F6",
-    "Closed": "#10B981",
-  };
-
   const handleStatusChange = (taskId, newStatus) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
@@ -63,6 +60,10 @@ export default function TaskPanel() {
     setOpenDropdown(null);
   };
 
+  const filteredTasks = tasks.filter((task) =>
+    task.text.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const renderTasks = (status) =>
     filteredTasks
       .filter((task) => task.status === status)
@@ -71,7 +72,8 @@ export default function TaskPanel() {
           key={task.id}
           className="flex items-center py-2 px-4 hover:bg-gray-800 rounded-lg mb-1 relative"
         >
-          <div className="relative mr-3">
+          {/* Status Dot and Dropdown */}
+          <div className="relative">
             <div
               className="w-4 h-4 rounded-full cursor-pointer"
               style={{ backgroundColor: statusColors[task.status] }}
@@ -80,12 +82,13 @@ export default function TaskPanel() {
               }
             ></div>
 
+            {/* Status Change Dropdown */}
             {openDropdown === task.id && (
-              <div className="absolute left-0 mt-2 bg-gray-800 border border-gray-700 rounded shadow-lg z-10 w-36">
+              <div className="absolute left-0 mt-2 bg-gray-800 border rounded shadow-lg z-10 w-40">
                 {Object.keys(statusColors).map((s) => (
                   <div
                     key={s}
-                    className="px-4 py-2 hover:bg-gray-700 cursor-pointer text-sm text-gray-300"
+                    className="flex text-sm justify-between items-center p-2 hover:bg-gray-100 cursor-pointer text-gray-300 hover:bg-gray-700"
                     onClick={() => handleStatusChange(task.id, s)}
                   >
                     {s}
@@ -116,10 +119,10 @@ export default function TaskPanel() {
   };
 
   return (
-    <div className="mx-auto !bg-[#050607] text-white p-4 min-h-screen">
-      {/* Search Box */}
-      <div className="flex items-center bg-gray-800 p-2 rounded-lg mb-4">
-        <Search size={18} className="text-gray-400" />
+    <div className="mx-auto">
+      {/* Search Input */}
+      <div className="flex items-center bg-gray-100 p-3 rounded-lg mb-4">
+        <Search size={18} className="text-gray-500" />
         <input
           type="text"
           value={searchQuery}
@@ -129,22 +132,18 @@ export default function TaskPanel() {
         />
       </div>
 
-      {/* User Filter */}
-      <div className="mb-4 flex">
-        <div className="bg-gray-800 text-gray-300 px-3 py-1 rounded-full text-sm flex items-center">
-          <span>You</span>
-          <button className="ml-1 text-gray-400">×</button>
-        </div>
-      </div>
-
-      {/* Task Lists */}
+      {/* Task Sections */}
       {Object.keys(statusColors).map((status) => (
         <div key={status} className="mb-6">
-          <div className="flex justify-between items-center cursor-pointer py-2" onClick={() => toggleSection(status)}>
-            <div className="flex items-center">
-              <p className="text-sm font-medium text-gray-300">{status}</p>
-              <span className="text-xs bg-gray-800 px-2 py-1 rounded-full ml-2 text-gray-400">
-                {countTasksByStatus(status)}
+          {/* Section Header */}
+          <div
+            className="flex justify-between items-center cursor-pointer"
+            onClick={() => toggleSection(status)}
+          >
+            <div className="flex items-center space-x-2">
+              <p className="text-sm font-semibold">{status}</p>
+              <span className="text-xs border px-2 py-1 rounded-full">
+                {filteredTasks.filter((task) => task.status === status).length}
               </span>
               <ChevronDown
                 size={14}
@@ -153,21 +152,25 @@ export default function TaskPanel() {
                 }`}
               />
             </div>
+
+            {/* Add Task Button */}
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                setShowInput({ ...showInput, [status]: !showInput[status] });
-              }}
-              className="p-1 rounded-full hover:bg-gray-700"
-            >
-              <Plus size={16} className="text-gray-400" />
-            </button>
+  onClick={(e) => {
+    e.stopPropagation();
+    setShowInput({ ...showInput, [status]: !showInput[status] });
+  }}
+  className="flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full transition"
+>
+  <Plus size={16} />
+</button>
+
           </div>
 
           {expandedSections[status] && (
             <div className="mt-1">
               {renderTasks(status)}
 
+              {/* Add Task Input */}
               {showInput[status] && (
                 <div className="mt-2 flex space-x-2">
                   <input
@@ -182,7 +185,7 @@ export default function TaskPanel() {
                   />
                   <button
                     onClick={() => addTask(status)}
-                    className="px-3 py-2 bg-gray-700 text-gray-300 rounded-lg hover:bg-gray-600"
+                    className="px-3 py-2 bg-green-500 rounded-lg text-white hover:bg-green-600"
                   >
                     Add
                   </button>

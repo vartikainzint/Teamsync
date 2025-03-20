@@ -68,7 +68,7 @@ const Customer = () => {
       {/* 🚀 Banner Section */}
       <div className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-center py-12 rounded-lg mb-12 shadow-lg">
         <h1 className="text-4xl md:text-5xl font-bold mb-4" style={{ fontFamily: '"Tiempos Headline", "Times New Roman", sans-serif' }}>📢 Hear from customers like you</h1>
-        <p className="text-lg md:text-xl mb-6">Learn what led them to Missive, what else they tried, and how their work improved.</p>
+        <p className="text-lg md:text-xl mb-6">Learn what led them to teamsync, what else they tried, and how their work improved.</p>
         <button className="bg-white text-blue-600 py-3 px-6 rounded-md font-semibold text-lg hover:bg-gray-100 transition">
           Get Started 🚀
         </button>

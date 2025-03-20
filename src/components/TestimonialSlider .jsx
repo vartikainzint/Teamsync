@@ -6,31 +6,31 @@ import "swiper/css/navigation";
 
 const testimonials = [
   {
-    quote: "Missive is more important to me than Slack. It’s a powerful solution to a deep-rooted challenge...",
+    quote: "teamsync is more important to me than Slack. It’s a powerful solution to a deep-rooted challenge...",
     name: "Jeremy Cai",
     role: "Founder at Italic",
     image: "https://randomuser.me/api/portraits/men/32.jpg",
   },
   {
-    quote: "Missive keeps our communication unified and our team coordinated.",
+    quote: "teamsync keeps our communication unified and our team coordinated.",
     name: "David Price",
     role: "Founder at Avenue Systems",
     image: "https://randomuser.me/api/portraits/men/44.jpg",
   },
   {
-    quote: "Missive helps our team make sure emails are handled quickly and effortlessly.",
+    quote: "teamsync helps our team make sure emails are handled quickly and effortlessly.",
     name: "Sarah Hum",
     role: "Co-Founder at Canny",
     image: "https://randomuser.me/api/portraits/women/25.jpg",
   },
   {
-    quote: "It just makes things so much easier. I can't imagine working without Missive anymore.",
+    quote: "It just makes things so much easier. I can't imagine working without teamsync anymore.",
     name: "John Doe",
     role: "CEO at Startup",
     image: "https://randomuser.me/api/portraits/men/50.jpg",
   },
   {
-    quote: "Our team productivity has skyrocketed since using Missive!",
+    quote: "Our team productivity has skyrocketed since using teamsync!",
     name: "Anna Smith",
     role: "Head of Marketing",
     image: "https://randomuser.me/api/portraits/women/30.jpg",

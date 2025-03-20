@@ -8,7 +8,6 @@ import { toast, ToastContainer } from "react-toastify"; // ✅ Correct import
 import "react-toastify/dist/ReactToastify.css"; // ✅ Required for styles
 
 const LoginPage = () => {
-  const [tenantId, setTenantId] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +16,7 @@ const LoginPage = () => {
   const { loading, error } = useSelector((state) => state.auth);
 
   const handleLogin = () => {
-    dispatch(loginUser({ tenantId, email, password })).then((res) => {
+    dispatch(loginUser({ email, password })).then((res) => {
       if (res.meta.requestStatus === "fulfilled") {
         toast.success("Login successful! Redirecting...", {
           position: "top-right",
@@ -59,7 +58,7 @@ const LoginPage = () => {
             <span className="flex-shrink mx-4 text-gray-400">OR</span>
             <div className="flex-grow border-t border-gray-600"></div>
           </div>
-
+{/* 
           <div>
             <label className="block text-gray-400 mb-1">Tenant ID</label>
             <Input
@@ -68,7 +67,7 @@ const LoginPage = () => {
               value={tenantId}
               onChange={(e) => setTenantId(e.target.value)}
             />
-          </div>
+          </div> */}
 
           <div>
             <label className="block text-gray-400 mb-1">Work email</label>

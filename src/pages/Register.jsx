@@ -25,10 +25,10 @@ const RegisterPage = () => {
             <div className="flex-grow border-t border-gray-600"></div>
           </div>
 
-          <div>
+          {/* <div>
             <label className="block text-gray-400 mb-1">Tenant ID</label>
             <Input placeholder="Enter Tenant ID" className="py-2 px-3 w-full" />
-          </div>
+          </div> */}
 
           <div>
             <label className="block text-gray-400 mb-1">Name</label>

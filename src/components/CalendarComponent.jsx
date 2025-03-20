@@ -25,24 +25,29 @@ const CalendarComponent = () => {
 
   const handleAddEvent = () => {
     if (newEventTitle.trim() !== "") {
-      setEvents([...events, { title: newEventTitle, start: newEventDate, end: newEventDate, allDay: true }]);
+      setEvents([
+        ...events,
+        { title: newEventTitle, start: newEventDate, end: newEventDate, allDay: true },
+      ]);
       setModalOpen(false);
       setNewEventTitle("");
     }
   };
 
   return (
-    <div className="relative bg-black min-h-screen p-4 text-white">
+    <div className="relative p-4 md:p-6 bg-gray-900 min-h-screen text-white">
       {/* Add Event Button */}
-      <button
-        className="px-5 py-2 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition"
-        onClick={() => setModalOpen(true)}
-      >
-        + Add Event
-      </button>
+      <div className="flex justify-end mb-4">
+        <button
+          className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
+          onClick={() => setModalOpen(true)}
+        >
+          + Add Event
+        </button>
+      </div>
 
       {/* Calendar */}
-      <div className="mt-4 bg-black rounded-lg shadow-lg">
+      <div className="calendar-wrapper bg-gray-800 p-3 md:p-5 rounded-xl shadow-lg">
         <Calendar
           localizer={localizer}
           events={events}
@@ -56,81 +61,44 @@ const CalendarComponent = () => {
           onNavigate={(newDate) => setDate(newDate)}
           selectable
           style={{
-            height: "80vh",
-            backgroundColor: "#000",
-            color: "#b3b3b3",
-            border: "none",
-          }}
-          components={{
-            toolbar: (props) => (
-              <div className="flex justify-between bg-[#151617] text-white p-4 rounded-t-lg">
-                <button
-                  onClick={() => props.onNavigate("PREV")}
-                  className="px-4 py-2 text-gray-400 hover:text-white transition"
-                >
-                  ←
-                </button>
-                <h2 className="text-lg font-semibold">{props.label}</h2>
-                <button
-                  onClick={() => props.onNavigate("NEXT")}
-                  className="px-4 py-2 text-gray-400 hover:text-white transition"
-                >
-                  →
-                </button>
-              </div>
-            ),
-            month: {
-              dateHeader: ({ date }) => {
-                const currentMonth = moment(date).month() === moment(date).month();
-                const isToday = moment(date).isSame(new Date(), "day");
-
-                return (
-                  <div
-                    className={`relative flex justify-center items-center h-12 ${
-                      currentMonth ? "bg-black text-gray-300" : "bg-[#151617] text-gray-500"
-                    }`}
-                  >
-                    {isToday ? (
-                      <span className="bg-red-600 text-white w-8 h-8 rounded-full flex items-center justify-center">
-                        {moment(date).date()}
-                      </span>
-                    ) : (
-                      moment(date).date()
-                    )}
-                  </div>
-                );
-              },
-            },
+            minHeight: "60vh",
+            maxHeight: "75vh",
+            width: "100%",
+            color: "white",
+            backgroundColor: "#111827",
+            padding: "10px",
+            borderRadius: "12px",
           }}
         />
       </div>
 
       {/* Modal for Adding Event */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-[#151617] p-6 rounded-lg shadow-xl w-96 text-white">
-            <h2 className="text-lg font-semibold mb-4">Add New Event</h2>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 px-4">
+          <div className="bg-gray-800 p-5 md:p-6 rounded-lg shadow-xl w-full max-w-md border border-gray-700">
+            <h2 className="text-lg font-semibold mb-4 text-white">Add New Event</h2>
             <input
               type="text"
               placeholder="Event Title"
               value={newEventTitle}
               onChange={(e) => setNewEventTitle(e.target.value)}
-              className="w-full p-2 border rounded bg-[#232425] text-white mb-3"
+              className="w-full p-3 border border-gray-600 bg-gray-700 text-white rounded mb-4 focus:outline-none"
             />
             <DatePicker
               selected={newEventDate}
               onChange={(date) => setNewEventDate(date)}
-              className="w-full p-2 border rounded bg-[#232425] text-white"
+              className="w-full p-3 border border-gray-600 bg-gray-700 text-white rounded focus:outline-none"
+              calendarClassName="dark-datepicker"
             />
-            <div className="flex justify-end space-x-3 mt-4">
+            <div className="flex justify-end space-x-4 mt-6">
               <button
-                className="px-4 py-2 bg-gray-500 rounded-lg hover:bg-gray-600 transition"
+                className="text-gray-400 font-semibold px-4 py-2 bg-gray-700 border border-gray-600 rounded hover:bg-gray-600 transition"
                 onClick={() => setModalOpen(false)}
               >
                 Cancel
               </button>
               <button
-                className="px-4 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 transition"
+                className="text-blue-400 font-semibold px-4 py-2 bg-gray-800 border border-gray-600 rounded hover:bg-gray-700 transition"
                 onClick={handleAddEvent}
               >
                 Add Event
@@ -139,6 +107,48 @@ const CalendarComponent = () => {
           </div>
         </div>
       )}
+
+      {/* Responsive & Dark Mode Styling */}
+      <style jsx>{`
+        :global(.react-datepicker) {
+          background-color: #1f2937 !important;
+          border: 1px solid #374151;
+          color: white;
+        }
+        :global(.react-datepicker__header) {
+          background-color: #374151 !important;
+          border-bottom: 1px solid #4b5563;
+        }
+        :global(.react-datepicker__day) {
+          color: white;
+        }
+        :global(.react-datepicker__day--selected) {
+          background-color: #2563eb !important;
+        }
+        :global(.react-datepicker__day--keyboard-selected) {
+          background-color: #1d4ed8 !important;
+        }
+
+        @media (max-width: 768px) {
+          .calendar-wrapper {
+            padding: 10px;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .calendar-wrapper {
+            padding: 5px;
+          }
+
+          :global(.rbc-calendar) {
+            font-size: 12px;
+          }
+
+          :global(.rbc-toolbar) {
+            flex-wrap: wrap;
+          }
+        }
+      `}</style>
     </div>
   );
 };
