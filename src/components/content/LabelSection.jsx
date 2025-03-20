@@ -33,7 +33,7 @@ const LabelSection = () => {
           I
         </div>
         <div>
-          <h2 className="text-2xl font-semibold text-white">Organisation</h2>
+          <h2 className="text-sm font-semibold text-white">Organisation</h2>
           <p className="text-sm text-gray-400">Labels</p>
         </div>
       </div>
@@ -42,11 +42,11 @@ const LabelSection = () => {
         Organization profiles are mostly used to populate variables in signatures. Please fill out the form below to update your organization's details.
       </p>
 
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-semibold">Labels</h1>
+      <div className="flex justify-between items-center mb-2">
+        <h1 className="text-sm font-semibold">Labels</h1>
         <button
           onClick={openModal}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          className="px-6 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700 transition"
         >
           Create Label
         </button>
@@ -64,8 +64,8 @@ const LabelSection = () => {
           <tbody>
             {teams.map((team, index) => (
               <tr key={index} className="border-t border-gray-700">
-                <td className="px-6 py-4">{team.name}</td>
-                <td className="px-6 py-4 flex gap-1 justify-center">
+                <td className="px-4 py-2 text-sm">{team.name}</td>
+                <td className="px-4 py-2 flex gap-1 justify-center">
                   <button
                     onClick={() => openEditModal(team, index)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"

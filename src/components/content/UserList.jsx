@@ -46,7 +46,7 @@ export default function UserList() {
             E
           </div>
           <div>
-            <h1 className="text-xl font-semibold">Org name</h1>
+            <h1 className="text-sm font-semibold">Org name</h1>
             <p className="text-gray-400 text-sm">Users</p>
           </div>
         </div>
@@ -92,12 +92,12 @@ export default function UserList() {
           <table className="min-w-full bg-gray-800 rounded-lg">
             <thead>
               <tr className="border-b border-gray-700">
-                <th className="py-3 px-4 text-left text-gray-400">Name</th>
-                <th className="py-3 px-4 text-left text-gray-400">Status</th>
-                <th className="py-3 px-4 text-left text-gray-400">
+                <th className="py-3 px-4 text-left text-gray-400 text-sm">Name</th>
+                <th className="py-3 px-4 text-left text-gray-400 text-sm">Status</th>
+                <th className="py-3 px-4 text-left text-gray-400 text-sm">
                   {activeTab === "Users" ? "Login" : "Email"}
                 </th>
-                <th className="py-3 px-4 text-left text-gray-400">Role</th>
+                <th className="py-3 px-4 text-left text-gray-400 text-sm">Role</th>
                 <th className="py-3 px-4 text-right text-gray-400">Actions</th>
               </tr>
             </thead>
@@ -120,7 +120,7 @@ export default function UserList() {
                       </div>
                     )}
                     <div>
-                      <p className="font-medium text-white">
+                      <p className="font-medium text-white text-sm">
                         {item.name}{" "}
                         {index === 0 && activeTab === "Users" && (
                           <span className="text-gray-400">(You)</span>
@@ -143,7 +143,7 @@ export default function UserList() {
                       <span className="text-white">{item.status}</span>
                     </div>
                   </td>
-                  <td className="py-3 px-4 text-white">
+                  <td className="py-3 px-4 text-white text-sm">
                     {activeTab === "Users" ? (
                       <img
                         src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
@@ -154,7 +154,7 @@ export default function UserList() {
                       item.email
                     )}
                   </td>
-                  <td className="py-3 px-4 text-white">{item.role}</td>
+                  <td className="py-3 px-4 text-white text-sm">{item.role}</td>
                   <td className="py-3 px-4 text-right">
                     <button
                       onClick={() => handleDelete(item.name)}

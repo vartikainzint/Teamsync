@@ -10,6 +10,11 @@ import OrganizationSettings from "./content/OrganizationSettings";
 import UserList from "./content/UserList";
 import CreateTeamSection from "./content/CreateTeamSection";
 import LabelSection from "./content/LabelSection";
+import AccountsSettings from "./content/AccountsSettings";
+import CalenderSettingsModal from "./content/CalenderSettingsModal";
+import IntegrationSettings from "./content/IntegrationSettings";
+import APITokens from "./content/APITokens";
+import Rules from "./content/Rules";
 // Placeholder for tabs not yet implemented
 const Placeholder = ({ tab }) => (
   <div className="text-center text-gray-400 text-lg p-4">Content for "{tab}" coming soon!</div>
@@ -33,9 +38,13 @@ export default function SettingsModal({ isOpen, onClose }) {
       case "Organizations":
         return <OrganizationSettings />;
       case "Accounts":
+        return <AccountsSettings />;
       case "Calendars":
+        return <CalenderSettingsModal />;
       case "Integrations":
+        return <IntegrationSettings />;
       case "API":
+        return <APITokens />;
       case "Users":
         return <UserList />;
       case "Teams":
@@ -43,6 +52,7 @@ export default function SettingsModal({ isOpen, onClose }) {
       case "Labels":
         return <LabelSection />;
       case "Rules":
+        return <Rules />;
       case "Signatures":
       case "Billing":
       case "Rewards 🪙":

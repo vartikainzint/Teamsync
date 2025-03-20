@@ -130,7 +130,7 @@ const Dashboard = () => {
           )}
 
           {/* Tasks Tab */}
-          {selectedTab === "Tasks" && <TaskPanel />}
+          {selectedTab.includes("Task") && <TaskPanel />}
 
           {/* Calendar Tab */}
           {selectedTab === "Calendars" && <CalendarComponent />}
@@ -141,7 +141,7 @@ const Dashboard = () => {
               <ChatLayout />
             </div>
           )}
-
+ {selectedTab.includes("Room") && <Room />}
         </div>
       </div>
     </div>

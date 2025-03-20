@@ -29,10 +29,10 @@ const CreateTeamSection = () => {
     <div className="p-8 bg-gray-900 min-h-screen text-white">
       {/* Heading and Button */}
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-semibold">Teams</h1>
+        <h1 className="text-sm font-semibold">Teams</h1>
         <button
           onClick={openModal}
-          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+          className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition text-sm"
         >
           Create Team
         </button>
@@ -43,21 +43,21 @@ const CreateTeamSection = () => {
         <table className="min-w-full bg-gray-800">
           <thead className="bg-gray-700">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Team Name</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Active Members</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Observers</th>
-              <th className="px-6 py-3 text-left text-sm font-semibold">Status</th>
-              <th className="px-6 py-3 text-center text-sm font-semibold">Actions</th>
+              <th className="px-6 py-3 text-sm font-semibold text-sm text-left">Team Name</th>
+              <th className="px-6 py-3 text-sm font-semibold text-sm text-left">Active Members</th>
+              <th className="px-6 py-3 text-sm font-semibold text-sm text-left">Observers</th>
+              <th className="px-6 py-3 text-sm font-semibold text-sm text-left">Status</th>
+              <th className="px-6 py-3 text-sm font-semibold text-sm text-left">Actions</th>
             </tr>
           </thead>
           <tbody>
             {teams.map((team, index) => (
               <tr key={index} className="border-t border-gray-700">
-                <td className="px-6 py-4">{team.name}</td>
-                <td className="px-6 py-4">{team.activeMembers}</td>
-                <td className="px-6 py-4">{team.observers}</td>
-                <td className="px-6 py-4">{team.status}</td>
-                <td className="px-6 py-4 flex gap-3 justify-center">
+                <td className="px-6 py-4 text-sm">{team.name}</td>
+                <td className="px-6 py-4 text-sm">{team.activeMembers}</td>
+                <td className="px-6 py-4 text-sm">{team.observers}</td>
+                <td className="px-6 py-4 text-sm">{team.status}</td>
+                <td className="px-6 py-4 text-sm flex gap-3 justify-center">
                   <button
                     onClick={() => openEditModal(team, index)}
                     className="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"

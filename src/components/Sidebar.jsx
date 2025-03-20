@@ -7,6 +7,8 @@ import {
   Plus,
   ChevronDown,
   ChevronRight,
+  Users,
+
 } from "lucide-react";
 import profileImage from "../assets/images/img-sharedinbox.png";
 import SidebarItem from "./SidebarItem";
@@ -167,7 +169,7 @@ export default function Sidebar({
                     onClick={() => toggleTeamInbox(team)}
                     className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-700"
                   >
-                    <div className="flex items-center">
+                    <div className="flex items-center text-sm">
                       <Inbox size={16} className="mr-2" />
                       Inbox
                     </div>
@@ -189,6 +191,8 @@ export default function Sidebar({
                     active={selectedTab === `${team}-Task`}
                     onClick={() => handleSelectTab(`${team}-Task`)}
                   />
+                  <SidebarItem text="Room" icon={<Users size={16} />} active={selectedTab === `${team}-Rooms`} onClick={() => handleSelectTab(`${team}-Rooms`)} />
+
                 </div>
               )}
             </div>

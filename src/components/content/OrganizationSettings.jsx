@@ -8,14 +8,14 @@ export default function OrganizationSettings() {
   const [inactivity, setInactivity] = useState({ days: 0, hours: 0, minutes: 0 });
 
   return (
-    <div className="max-w-6xl mx-auto bg-gray-900 rounded-2xl shadow-lg p-4 sm:p-6 md:p-10 space-y-10 text-white w-full">
+    <div className="max-w-6xl mx-auto bg-gray-900 rounded-2xl shadow-lg p-2 sm:p-3 md:p-4 space-y-10 text-white w-full">
 
       {/* General */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">General</h2>
+      <div className="space-x-4">
+        <h3 className="text-sm font-medium bg-gray-700 p-2 mb-2">General</h3>
         <div className="space-y-4">
           <div>
-            <label className="block font-medium mb-2">Name</label>
+            <label className="block font-medium text-sm mb-2 text-sm">Name</label>
             <input
               type="text"
               value={name}
@@ -25,8 +25,8 @@ export default function OrganizationSettings() {
             />
           </div>
           <div>
-            <label className="block font-medium mb-2">Avatar</label>
-            <button className="text-blue-400 font-medium px-2 py-1 hover:underline">
+            <label className="block font-medium text-sm mb-2 text-sm">Avatar</label>
+            <button className="text-blue-400 font-medium px-2 py-1 hover:underline text-sm">
               Upload Image
             </button>
           </div>
@@ -34,13 +34,13 @@ export default function OrganizationSettings() {
       </div>
 
       {/* Personal Options */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Personal Options</h2>
+      <div className="space-x-4">
+        <h3 className="text-sm font-medium bg-gray-700 p-2 mb-2">Personal Options</h3>
         <p className="text-gray-400 text-sm">These options are personal and only affect you.</p>
 
         <div className="space-y-4">
           <div>
-            <label className="block font-medium mb-2">Conversations Color</label>
+            <label className="block font-medium text-sm mb-2 text-sm">Conversations Color</label>
             <input
               type="color"
               value={color}
@@ -50,10 +50,10 @@ export default function OrganizationSettings() {
           </div>
 
           <div className="space-y-2">
-            <label className="block font-medium">Assignment</label>
+            <label className="block font-medium text-sm">Assignment</label>
             <div className="space-y-2">
               {["keep", "remove"].map((option) => (
-                <label key={option} className="flex items-center gap-2">
+                <label key={option} className="flex items-center gap-2 text-sm">
                   <input
                     type="radio"
                     value={option}
@@ -69,15 +69,15 @@ export default function OrganizationSettings() {
       </div>
 
       {/* Organization Options */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Organization Options</h2>
+      <div className="space-x-4">
+        <h3 className="text-sm font-medium bg-gray-700 p-2 mb-2">Organization Options</h3>
         <p className="text-gray-400 text-sm">These settings affect all users.</p>
 
         <div className="space-y-2">
-          <label className="block font-medium">Emails Sent to Multiple Teams</label>
+          <label className="block font-medium text-sm">Emails Sent to Multiple Teams</label>
           <div className="space-y-2">
             {["copy", "single"].map((option) => (
-              <label key={option} className="flex items-center gap-2">
+              <label key={option} className="flex items-center gap-2 text-sm">
                 <input
                   type="radio"
                   value={option}
@@ -94,16 +94,16 @@ export default function OrganizationSettings() {
       </div>
 
       {/* Schedule */}
-      <div className="space-y-6">
-        <h2 className="text-2xl font-semibold">Schedule</h2>
+      <div className="space-x-4">
+        <h3 className="text-sm font-medium bg-gray-700 p-2 mb-2">Schedule</h3>
 
         <div>
-          <label className="block font-medium mb-2">Business Hours</label>
+          <label className="block font-medium text-sm mb-2 text-sm">Business Hours</label>
           <p className="text-gray-500 italic text-sm">[Business hours selector coming soon]</p>
         </div>
 
         <div>
-          <label className="block font-medium mb-3">Inactivity Period</label>
+          <label className="block font-medium text-sm mb-3">Inactivity Period</label>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <input
               type="number"
@@ -135,7 +135,7 @@ export default function OrganizationSettings() {
 
       {/* Danger Zone */}
       <div className="space-y-4 border-t border-gray-700 pt-6">
-        <h2 className="text-2xl font-semibold text-red-500">Delete Organization</h2>
+        <h3 className="text-sm font-medium bg-gray-700 p-2 mb-2 text-red-500">Delete Organization</h3>
         <p className="text-gray-400">Permanently remove this organization and all its data.</p>
         <button className="text-blue-400 font-medium px-2 py-1 hover:underline">
           Delete Organization

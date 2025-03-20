@@ -19,17 +19,17 @@ export default function ProfileContent() {
   return (
     <div className="max-w-3xl mx-auto p-6 bg-gray-800 rounded-2xl shadow-xl border border-gray-700">
       {/* Organization Header */}
-      <div className="flex items-center gap-4 mb-8">
+      <div className="flex items-center gap-4 mb-4">
         <div className="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center text-xl font-semibold text-white">
           I
         </div>
         <div>
-          <h2 className="text-2xl font-semibold text-white">Organisation</h2>
+          <h2 className="text-sm font-semibold text-white">Organisation</h2>
           <p className="text-sm text-gray-400">Profile</p>
         </div>
       </div>
 
-      <p className="text-sm text-gray-400 mb-8 leading-relaxed">
+      <p className="text-sm text-gray-400 mb-2 leading-relaxed">
         Organization profiles are mostly used to populate variables in signatures. Please fill out the form below to update your organization's details.
       </p>
 
