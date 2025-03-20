@@ -27,18 +27,18 @@ export default function BillingPlans() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-lg relative">
-      <h2 className="text-xl font-semibold">Billing</h2>
+      <h2 className="text-sm font-semibold">Billing</h2>
 
       {/* Billing Cycle Toggle */}
       <div className="flex justify-end space-x-2 mt-4">
         <button
-          className={`px-3 py-1 rounded ${billingCycle === "monthly" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          className={`px-3 py-1 rounded ${billingCycle === "monthly" ? "bg-blue-500 text-white" : "bg-gray-900"}`}
           onClick={() => setBillingCycle("monthly")}
         >
           Monthly
         </button>
         <button
-          className={`px-3 py-1 rounded ${billingCycle === "yearly" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+          className={`px-3 py-1 rounded ${billingCycle === "yearly" ? "bg-blue-500 text-white" : "bg-gray-900"}`}
           onClick={() => setBillingCycle("yearly")}
         >
           Yearly <span className="bg-yellow-400 text-black px-2 rounded text-sm">Save 20%</span>
@@ -53,8 +53,8 @@ export default function BillingPlans() {
             className={`p-3 border rounded-md text-center ${selectedPlan === plan.id ? "border-blue-500 bg-gray-800" : "border-gray-300"}`}
             onClick={() => handlePlanClick(plan)}
           >
-            <h3 className="text-lg font-semibold">{plan.name}</h3>
-            <p className="text-xl">{billingCycle === "monthly" ? plan.monthly : plan.yearly}</p>
+            <h3 className="text-sm font-semibold">{plan.name}</h3>
+            <p className="text-sm">{billingCycle === "monthly" ? plan.monthly : plan.yearly}</p>
             <p className="text-sm text-gray-500">per user/{billingCycle}</p>
           </button>
         ))}
@@ -65,37 +65,37 @@ export default function BillingPlans() {
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b">
-              <th className="text-left p-2">Pricing</th>
+              <th className="text-sm text-left text-sm  p-2">Pricing</th>
               {plans.map((plan) => (
-                <th key={plan.id} className="p-2">{plan.name}</th>
+                <th key={plan.id} className="text-sm  p-2">{plan.name}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             <tr className="border-b">
-              <td className="p-2">Price</td>
+              <td className="text-sm  p-2">Price</td>
               {plans.map((plan) => (
-                <td key={plan.id} className="p-2 text-center">
+                <td key={plan.id} className="text-sm  p-2 text-center">
                   {billingCycle === "monthly" ? plan.monthly : plan.yearly}
                 </td>
               ))}
             </tr>
             <tr className="border-b">
-              <td className="p-2">Users</td>
+              <td className="text-sm  p-2">Users</td>
               {plans.map((plan) => (
-                <td key={plan.id} className="p-2 text-center">{plan.users}</td>
+                <td key={plan.id} className="text-sm  p-2 text-center">{plan.users}</td>
               ))}
             </tr>
             <tr className="border-b">
-              <td className="p-2">History</td>
+              <td className="text-sm  p-2">History</td>
               {plans.map((plan) => (
-                <td key={plan.id} className="p-2 text-center">{plan.history}</td>
+                <td key={plan.id} className="text-sm  p-2 text-center">{plan.history}</td>
               ))}
             </tr>
             <tr className="border-b">
-              <td className="p-2">Shared Accounts</td>
+              <td className="text-sm  p-2">Shared Accounts</td>
               {plans.map((plan) => (
-                <td key={plan.id} className="p-2 text-center">{plan.sharedAccounts}</td>
+                <td key={plan.id} className="text-sm  p-2 text-center">{plan.sharedAccounts}</td>
               ))}
             </tr>
           </tbody>
@@ -106,7 +106,7 @@ export default function BillingPlans() {
       {showModal && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50 w-full">
           <div className="bg-gray-800 rounded-lg p-6 w-96 shadow-lg">
-            <h3 className="text-lg font-semibold">
+            <h3 className="text-sm font-semibold">
               Upgrade to the <span className="text-blue-600">{planToUpgrade.name} {billingCycle}</span> plan?
             </h3>
             <p className="text-sm text-gray-100 mt-2">
@@ -116,7 +116,7 @@ export default function BillingPlans() {
               <p className="text-yellow-800 text-sm">
                 This {billingCycle} plan provides a <strong className="text-red-600">20% discount</strong> compared to the monthly pricing.
               </p>
-              <p className="text-yellow-600 text-xs mt-1">
+              <p className="text-yellow-600 text-sm mt-1">
                 Please note that this is a non-refundable, one-time payment.
               </p>
             </div>

@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import SettingsModal from "./SettingsModal";
 import SetStatusModal from "./SetStatusModal"; // Import modal
-
+import EnterCommandModal from "./EnterCommandModal";
+import AnalyticsModal from "./AnalyticsModal";
 export default function ProfileDropdown({ onClose }) {
   const dropdownRef = useRef(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false); // State for Set Status modal
+  const [iscommandModalOpen, setcommandModalOpen] = useState(false);
+  const [isanalyticsModalOpen, setanalyticsModalOpen] = useState(false);
+
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -43,6 +47,12 @@ export default function ProfileDropdown({ onClose }) {
       setIsSettingsOpen(true);
     } else if (item.text === "Set a status") {
       setIsStatusModalOpen(true); // Open Set Status modal
+    }
+    else if (item.text === "Enter a command") {
+      setcommandModalOpen(true); // Open Set Status modal
+    } 
+    else if (item.text === "Analytics") {
+      setanalyticsModalOpen(true); // Open Set Status modal
     } else {
       onClose(); // Close dropdown for other items
     }
@@ -87,6 +97,9 @@ export default function ProfileDropdown({ onClose }) {
         isOpen={isStatusModalOpen}
         onClose={() => setIsStatusModalOpen(false)}
       />
+      <EnterCommandModal isOpen={iscommandModalOpen} onClose={() => setcommandModalOpen(false)} />
+      <AnalyticsModal isOpen={isanalyticsModalOpen} onClose={() => setanalyticsModalOpen(false)} />
+
     </>
   );
 }

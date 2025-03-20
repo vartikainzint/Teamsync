@@ -50,7 +50,7 @@ export default function SignaturesUI() {
 
       {/* Main Content */}
       <div className="flex-1 p-6 bg-gray-800">
-        <h2 className="text-lg font-semibold">{selectedUser} - Signatures</h2>
+        <h2 className="text-lg font-semibold text-sm">{selectedUser} - Signatures</h2>
         <div className="mt-4 bg-gray-800 border p-4 rounded">
           <div className="flex justify-between items-center">
             <span className="text-sm text-gray-100">Reusable signatures</span>

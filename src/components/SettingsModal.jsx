@@ -19,7 +19,7 @@ import Signatures from "./content/Signatures";
 import BillingPlans from "./content/BillingPlans";
 import RewardComponent from "./content/RewardComponent";
 import DownloadApp from "./content/DownloadApp";
-
+import SupportPanel from "./content/SupportPanel";
 // Placeholder for tabs not yet implemented
 const Placeholder = ({ tab }) => (
   <div className="text-center text-gray-400 text-lg p-4">Content for "{tab}" coming soon!</div>
@@ -67,7 +67,7 @@ export default function SettingsModal({ isOpen, onClose }) {
       case "Download apps":
         return <DownloadApp />
       case "Help & Feedback":
-        return <Placeholder tab={activeTab} />;
+        return <SupportPanel />;
       default:
         return <div className="text-center text-red-500">Unknown Tab: {activeTab}</div>;
     }
