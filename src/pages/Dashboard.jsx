@@ -7,6 +7,7 @@ import CalendarComponent from "../components/CalendarComponent";
 import ChatLayout from "../components/ChatLayout";
 import NewConversation from "../components/NewConversation";
 import NewEmail from "../components/NewEmail";
+import Room from "../components/Room";
 import { Menu } from "lucide-react";
 
 const Dashboard = () => {
@@ -99,7 +100,7 @@ const Dashboard = () => {
         </div>
 
         {/* Content Area */}
-        <div className="h-full space-y-4 p-4">
+        <div className="h-full space-y-4">
 
           {/* Show Email/Conversation Layout */}
           {(selectedTab === "Inbox" || selectedTab === "NewEmail" || selectedTab === "NewConversation") && (
@@ -130,10 +131,13 @@ const Dashboard = () => {
           )}
 
           {/* Tasks Tab */}
-          {selectedTab === "Tasks" && <TaskPanel />}
+          {selectedTab.includes("Task") && <TaskPanel />}
 
           {/* Calendar Tab */}
           {selectedTab === "Calendars" && <CalendarComponent />}
+
+          {/* Chat Tab */}
+          {selectedTab.includes("Room") && <Room />}
 
           {/* All Tab */}
           {selectedTab === "All" && (

@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { X } from "lucide-react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import { createOrganization } from '../Redux/features/slice/createorgSlice';
+import { useSelector, useDispatch } from "react-redux";
 export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
   const [step, setStep] = useState(1);
   const [companyName, setCompanyName] = useState("");
@@ -14,18 +18,17 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
     Sun: { active: false, from: "09:00", to: "17:00" },
   });
   const [inactivity, setInactivity] = useState({ days: 7, hours: 0, minutes: 0 });
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
-  const handleCreateOrganization = () => {
-    onCreate({
-      companyName,
-      businessHours,
-      inactivity: {
-        days: Number(inactivity.days),
-        hours: Number(inactivity.hours),
-        minutes: Number(inactivity.minutes),
-      },
-    });
-    onClose();
+  const handleCreateOrganization = async () => {
+    try {
+      await dispatch(createOrganization(companyName)).unwrap();
+      toast.success('Organization created successfully!');
+      onClose();
+    } catch (error) {
+      toast.error(error.error || 'Failed to create organization');
+    }
   };
 
   const handleCheckboxChange = (day) => {

@@ -8,6 +8,8 @@ import {
   ChevronDown,
   ChevronRight,
 } from "lucide-react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchOrganizations } from "../Redux/features/slice/orgSlice";
 import profileImage from "../assets/images/img-sharedinbox.png";
 import SidebarItem from "./SidebarItem";
 import ProfileDropdown from "./ProfileDropdown";
@@ -20,10 +22,7 @@ export default function Sidebar({
   selectedTab,
   setSelectedTab,
   setCalendarVisible,
-  organizations,
   addOrganization,
-  selectedOrganization,
-  setSelectedOrganization,
   setSidebarOpen,
 }) {
   const [dropdowns, setDropdowns] = useState({ profile: false, plus: false });
@@ -35,6 +34,14 @@ export default function Sidebar({
 
   const profileDropdownRef = useRef(null);
   const plusDropdownRef = useRef(null);
+  const dispatch = useDispatch();
+  const { organizations, loading, error } = useSelector((state) => state.org);
+  // console.log("organization data", organization);
+
+  useEffect(() => {
+    dispatch(fetchOrganizations());
+  }, [dispatch]);
+  // console.log("loading organizations",organizations);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -152,58 +159,75 @@ export default function Sidebar({
           <h3 className="text-xs font-semibold text-gray-500 mb-2 uppercase">
             Team Spaces
           </h3>
-          {["Marketing Team", "Development Team"].map((team) => (
-            <div key={team} className="mb-2">
-              <div
-                onClick={() => toggleTeam(team)}
-                className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-800 text-gray-300"
-              >
-                <span className="text-sm">{team}</span>
-                {openTeams[team] ? (
-                  <ChevronDown size={16} />
-                ) : (
-                  <ChevronRight size={16} />
+
+          {loading ? (
+            <p className="text-gray-400 text-sm">Loading organizations...</p>
+          ) : organizations && organizations.length > 0 ? (
+            organizations.map((org) => (
+              <div key={org._id} className="mb-2">
+                <div
+                  onClick={() => toggleTeam(org.name)}
+                  className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-800 text-gray-300"
+                >
+                  <span className="text-sm">{org.name}</span>
+                  {openTeams[org.name] ? (
+                    <ChevronDown size={16} />
+                  ) : (
+                    <ChevronRight size={16} />
+                  )}
+                </div>
+
+                {openTeams[org.name] && (
+                  <div className="ml-4 mt-1 space-y-1">
+                    <div
+                      onClick={() => toggleTeamInbox(org.name)}
+                      className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-800"
+                    >
+                      <div className="flex items-center text-gray-400">
+                        <Inbox size={16} className="mr-2" /> Inbox
+                      </div>
+                      {openTeamInboxes[org.name] ? (
+                        <ChevronDown size={14} />
+                      ) : (
+                        <ChevronRight size={14} />
+                      )}
+                    </div>
+                    {openTeamInboxes[org.name] &&
+                      ["Assigned to me", "All"].map((subItem) => (
+                        <SidebarItem
+                          key={`${org.name}-Inbox-${subItem}`}
+                          text={subItem}
+                          icon={<Inbox size={14} />}
+                          active={
+                            selectedTab === `${org.name}-Inbox-${subItem}`
+                          }
+                          onClick={() =>
+                            handleSelectTab(`${org.name}-Inbox-${subItem}`)
+                          }
+                        />
+                      ))}
+
+                    <SidebarItem
+                      text="Task"
+                      icon={<CheckSquare size={16} />}
+                      active={selectedTab === `${org.name}-Task`}
+                      onClick={() => handleSelectTab(`${org.name}-Task`)}
+                    />
+                    <SidebarItem
+                      text="Room"
+                      icon={<CheckSquare size={16} />}
+                      active={selectedTab === `${org.name}-Room`}
+                      onClick={() => handleSelectTab(`${org.name}-Room`)}
+                    />
+                  </div>
                 )}
               </div>
-
-              {openTeams[team] && (
-                <div className="ml-4 mt-1 space-y-1">
-                  <div
-                    onClick={() => toggleTeamInbox(team)}
-                    className="flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-gray-800"
-                  >
-                    <div className="flex items-center text-gray-400">
-                      <Inbox size={16} className="mr-2" /> Inbox
-                    </div>
-                    {openTeamInboxes[team] ? (
-                      <ChevronDown size={14} />
-                    ) : (
-                      <ChevronRight size={14} />
-                    )}
-                  </div>
-                  {openTeamInboxes[team] &&
-                    ["Assigned to me", "All"].map((subItem) => (
-                      <SidebarItem
-                        key={`${team}-Inbox-${subItem}`}
-                        text={subItem}
-                        icon={<Inbox size={14} />}
-                        active={selectedTab === `${team}-Inbox-${subItem}`}
-                        onClick={() =>
-                          handleSelectTab(`${team}-Inbox-${subItem}`)
-                        }
-                      />
-                    ))}
-
-                  <SidebarItem
-                    text="Task"
-                    icon={<CheckSquare size={16} />}
-                    active={selectedTab === `${team}-Task`}
-                    onClick={() => handleSelectTab(`${team}-Task`)}
-                  />
-                </div>
-              )}
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">
+              No organizations found for this user.
+            </p>
+          )}
         </div>
       </nav>
 
