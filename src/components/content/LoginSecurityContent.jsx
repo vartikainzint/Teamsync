@@ -54,8 +54,8 @@ export default function LoginSecurityContent() {
           </div>
           
           <div className="bg-gray-800 p-4 rounded-lg">
-            <h3 className="text-sm font-semibold">Delete Missive account</h3>
-            <p className="text-sm text-gray-300">Delete your Missive account and all data associated with it.</p>
+            <h3 className="text-sm font-semibold">Delete TeamSync account</h3>
+            <p className="text-sm text-gray-300">Delete your TeamSync account and all data associated with it.</p>
             <button className="bg-red-500 text-white px-4 py-2 rounded mt-2 flex items-center">
               <FaTrashAlt className="mr-2" /> Delete
             </button>

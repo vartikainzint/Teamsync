@@ -15,6 +15,11 @@ import CalenderSettingsModal from "./content/CalenderSettingsModal";
 import IntegrationSettings from "./content/IntegrationSettings";
 import APITokens from "./content/APITokens";
 import Rules from "./content/Rules";
+import Signatures from "./content/Signatures";
+import BillingPlans from "./content/BillingPlans";
+import RewardComponent from "./content/RewardComponent";
+import DownloadApp from "./content/DownloadApp";
+
 // Placeholder for tabs not yet implemented
 const Placeholder = ({ tab }) => (
   <div className="text-center text-gray-400 text-lg p-4">Content for "{tab}" coming soon!</div>
@@ -54,9 +59,13 @@ export default function SettingsModal({ isOpen, onClose }) {
       case "Rules":
         return <Rules />;
       case "Signatures":
+        return <Signatures />
       case "Billing":
+        return <BillingPlans />
       case "Rewards 🪙":
+        return <RewardComponent />
       case "Download apps":
+        return <DownloadApp />
       case "Help & Feedback":
         return <Placeholder tab={activeTab} />;
       default:
