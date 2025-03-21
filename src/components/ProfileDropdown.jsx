@@ -3,19 +3,27 @@ import SettingsModal from "./SettingsModal";
 import SetStatusModal from "./SetStatusModal"; // Import modal
 import EnterCommandModal from "./EnterCommandModal";
 import AnalyticsModal from "./AnalyticsModal";
+import ContactDropdownModal from "./ContactDropdownModal";
+import ResponsesComponent from "./ResponsesComponent";
+import UpdateNotification from "./UpdateNotification";
+import WhatsNew from "./WhatsNew";
 export default function ProfileDropdown({ onClose }) {
   const dropdownRef = useRef(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false); // State for Set Status modal
   const [iscommandModalOpen, setcommandModalOpen] = useState(false);
   const [isanalyticsModalOpen, setanalyticsModalOpen] = useState(false);
+  const [iscontactsModalOpen, setcontactsModalOpen] = useState(false);
+  const [isresponseModalOpen, setresponseModalOpen] = useState(false);
+  const [isnotificationModalOpen, setnotificationModalOpen] = useState(false);
+  const [isnewModalOpen, setnewModalOpen] = useState(false);
 
 
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        onClose();
+        onClose(); // Close dropdown, but don't open other modals
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -23,6 +31,7 @@ export default function ProfileDropdown({ onClose }) {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [onClose]);
+  
 
   const menuItems = [
     { text: "Set a status", shortcut: "Ctrl + Shift + Y" },
@@ -34,9 +43,7 @@ export default function ProfileDropdown({ onClose }) {
     { separator: true },
     { text: "Sync" },
     { text: "Check for updates..." },
-    { text: "Rewards" },
     { text: "What’s new?" },
-    { text: "Help & Feedback" },
     { separator: true },
     { text: "Log out", danger: true },
   ];
@@ -53,7 +60,20 @@ export default function ProfileDropdown({ onClose }) {
     } 
     else if (item.text === "Analytics") {
       setanalyticsModalOpen(true); // Open Set Status modal
-    } else {
+    } 
+    else if (item.text === "Contacts") {
+      setcontactsModalOpen(true); // Open Set Status modal
+    } 
+    else if (item.text === "Responses") {
+      setresponseModalOpen(true); // Open Set Status modal
+    } 
+    else if (item.text === "Check for updates...") {
+      setnotificationModalOpen(true);
+    }
+    else if (item.text === "What’s new?") {
+      setnewModalOpen(true);
+    }
+    else {
       onClose(); // Close dropdown for other items
     }
   };
@@ -99,6 +119,10 @@ export default function ProfileDropdown({ onClose }) {
       />
       <EnterCommandModal isOpen={iscommandModalOpen} onClose={() => setcommandModalOpen(false)} />
       <AnalyticsModal isOpen={isanalyticsModalOpen} onClose={() => setanalyticsModalOpen(false)} />
+      <ContactDropdownModal isOpen={iscontactsModalOpen} onClose={() => setcontactsModalOpen(false)} />
+      <ResponsesComponent isOpen={isresponseModalOpen} onClose={() => setresponseModalOpen(false)} />
+      <UpdateNotification isOpen={isnotificationModalOpen} onClose={() => setnotificationModalOpen(false)} />
+      <WhatsNew isOpen={isnewModalOpen} onClose={() => setnewModalOpen(false)} />
 
     </>
   );
