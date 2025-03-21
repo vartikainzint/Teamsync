@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import SettingsModal from "./SettingsModal";
 import SetStatusModal from "./SetStatusModal"; // Import modal
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../Redux/features/auth/authSlice"; // Adjust the path if necessary
 export default function ProfileDropdown({ onClose }) {
   const dropdownRef = useRef(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isStatusModalOpen, setIsStatusModalOpen] = useState(false); // State for Set Status modal
-
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // Close dropdown on outside click
   useEffect(() => {
     function handleClickOutside(event) {
@@ -43,7 +46,10 @@ export default function ProfileDropdown({ onClose }) {
       setIsSettingsOpen(true);
     } else if (item.text === "Set a status") {
       setIsStatusModalOpen(true); // Open Set Status modal
-    } else {
+    } else if (item.text === "Log out") {
+      dispatch(logout());
+      navigate("/login");
+    }else {
       onClose(); // Close dropdown for other items
     }
   };

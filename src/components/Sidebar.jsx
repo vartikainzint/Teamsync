@@ -9,7 +9,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchOrganizations } from "../Redux/features/slice/orgSlice";
+import { fetchOrganizations,setSelectedOrganization  } from "../Redux/features/slice/orgSlice";
 import profileImage from "../assets/images/img-sharedinbox.png";
 import SidebarItem from "./SidebarItem";
 import ProfileDropdown from "./ProfileDropdown";
@@ -17,7 +17,6 @@ import CreateOrganizationModal from "./CreateOrganizationModal";
 import DropdownMenu from "./DropdownMenu";
 import AddTaskModal from "./AddTaskModal";
 import AddCalendarModal from "./AddCalenderModal";
-
 export default function Sidebar({
   selectedTab,
   setSelectedTab,
@@ -217,7 +216,10 @@ export default function Sidebar({
                       text="Room"
                       icon={<CheckSquare size={16} />}
                       active={selectedTab === `${org.name}-Room`}
-                      onClick={() => handleSelectTab(`${org.name}-Room`)}
+                      onClick={() => {
+                        setSelectedTab(`${org.name}-Room`);
+                        dispatch(setSelectedOrganization(org._id));
+                      }}                    
                     />
                   </div>
                 )}

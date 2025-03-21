@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/dev/api';
+const API_URL =  `${import.meta.env.VITE_APP_URL}/api/auth`;
 
 const getAuthHeader = (token) => ({
   headers: {
@@ -19,7 +19,7 @@ export const createOrganization = createAsyncThunk(
       const token = state.auth.token; // get token from auth slice
 
       const response = await axios.post(
-        `${BASE_URL}/org/`,
+        `${API_URL}/org/`,
         { name: companyName },
         getAuthHeader(token)
       );

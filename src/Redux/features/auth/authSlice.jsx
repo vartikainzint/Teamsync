@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // API Base URL
-const API_URL =  `${import.meta.env.VITE_APP_URL}/dev/api/auth`;
+const API_URL =  `${import.meta.env.VITE_APP_URL}/api/auth`;
 console.log(API_URL)
 
 // Register User

@@ -103,7 +103,7 @@ const LoginPage = () => {
           </Button>
 
           <p className="text-center text-gray-400">
-            New to Missive? <Link to="/register" className="text-blue-400">Create an account</Link>
+            New to TeamSync? <Link to="/register" className="text-blue-400">Create an account</Link>
           </p>
         </div>
       </div>
@@ -113,7 +113,7 @@ const LoginPage = () => {
         <div className="max-w-md text-center">
           <p className="text-yellow-400 text-xl">⭐⭐⭐⭐⭐ 4.9 → Over 200 reviews</p>
           <h3 className="text-2xl font-semibold mt-4">
-            With Missive, we noticed more and better cooperation within the team.
+            With TeamSync, we noticed more and better cooperation within the team.
           </h3>
           <p className="text-gray-400 mt-2">Daniel Picón, Pipedrive</p>
           <p className="text-gray-500 mt-6">A reliable partner for world-class SMB teams</p>
