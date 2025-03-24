@@ -109,7 +109,7 @@ export default function SettingsModal({ isOpen, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 p-4 md:p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 max-h-full">
+        <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-gray-800 max-h-full">
           {renderContent()}
         </div>
       </div>

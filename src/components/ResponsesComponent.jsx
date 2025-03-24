@@ -27,7 +27,7 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
       onClick={onClose}
     >
       <div 
-        className="w-full max-w-6xl h-[90vh] overflow-hidden bg-gray-900 text-white shadow-lg relative rounded-lg flex"
+        className="w-full max-w-6xl h-auto min-h-[90vh] sm:h-[90vh] overflow-hidden bg-gray-900 text-white shadow-lg relative rounded-lg flex flex-col sm:flex-row"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Icon */}
@@ -36,11 +36,11 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
         </button>
 
         {/* Sidebar with Tabs */}
-        <div className="w-1/5 bg-gray-800 p-4 flex flex-col">
-          <h2 className="text-lg font-semibold mb-2">Responses</h2>
+        <div className="w-full sm:w-1/4 bg-gray-800 p-4 flex flex-col">
+          <h2 className="text-lg font-semibold mb-2 text-sm">Responses</h2>
           <div className="flex flex-col mb-2">
             <button 
-              className={`p-2 mb-2 text-left ${activeTab === "All" ? "bg-blue-600 text-white" : "text-gray-300"}`}
+              className={`p-2 mb-2 text-left text-sm ${activeTab === "All" ? "bg-blue-600 text-white" : "text-gray-300"}`}
               onClick={() => setActiveTab("All")}
             >
               All
@@ -61,8 +61,8 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
         </div>
 
         {/* Response List */}
-        <div className="w-1/4 bg-gray-700 p-4 flex flex-col overflow-y-auto">
-          <h3 className="text-lg font-semibold mb-2">Response List</h3>
+        <div className="w-full sm:w-1/4 bg-gray-700 p-4 flex flex-col overflow-y-auto">
+          <h3 className="text-lg font-semibold mb-2 text-sm">Response List</h3>
           <ul className="flex-1 overflow-y-auto">
             {responses[activeTab].map((response, index) => (
               <li 
@@ -77,9 +77,9 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
         </div>
 
         {/* Mail Composer */}
-        <div className="w-1/2 bg-gray-700 p-6 flex flex-col">
+        <div className="w-full sm:w-1/2 bg-gray-700 p-6 flex flex-col">
           {selectedResponse ? (
-            <h3 className="text-lg font-semibold mb-3">{selectedResponse}</h3>
+            <h3 className="text-lg font-semibold mb-3 text-sm">{selectedResponse}</h3>
           ) : (
             <input
               type="text"

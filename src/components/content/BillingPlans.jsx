@@ -46,7 +46,8 @@ export default function BillingPlans() {
       </div>
 
       {/* Plan Selection */}
-      <div className="mt-4 grid grid-cols-4 gap-4 border p-4 rounded-lg">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 border p-4 rounded-lg
+">
         {plans.map((plan) => (
           <button
             key={plan.id}
@@ -61,8 +62,9 @@ export default function BillingPlans() {
       </div>
 
       {/* Feature Table */}
-      <div className="mt-6 border rounded-lg p-4">
-        <table className="w-full border-collapse">
+      <div className="mt-6 border rounded-lg p-4 w-full overflow-x-auto">
+        <table className="w-full border-collapse sm:table-auto
+">
           <thead>
             <tr className="border-b">
               <th className="text-sm text-left text-sm  p-2">Pricing</th>

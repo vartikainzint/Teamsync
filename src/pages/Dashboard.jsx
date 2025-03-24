@@ -50,7 +50,7 @@ const Dashboard = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-30 w-64 bg-gray-800 transform ${
+        className={`fixed inset-y-0 left-0 z-30 w-64 md:w-64 w-full bg-gray-800 transform ${
           mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 ease-in-out md:hidden`}
       >
@@ -104,7 +104,7 @@ const Dashboard = () => {
 
           {/* Show Email/Conversation Layout */}
           {(selectedTab === "Inbox" || selectedTab === "NewEmail" || selectedTab === "NewConversation") && (
-            <div className="flex h-full">
+            <div className="flex flex-col sm:flex-row h-full">
               
               {/* Email List on Left */}
               <EmailList

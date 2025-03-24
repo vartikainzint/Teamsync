@@ -99,8 +99,8 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="w-64 p-4 bg-gray-950 min-h-screen flex flex-col shadow-xl rounded-r-2xl text-white relative">
-      <div className="relative flex items-center mb-6">
+<aside className="w-64 md:w-64 w-full p-4 bg-gray-950 min-h-screen flex flex-col shadow-xl rounded-r-2xl text-white relative">
+<div className="relative flex items-center mb-6">
         <div className="relative mr-2" ref={profileDropdownRef}>
           <img
             src={profileImage}

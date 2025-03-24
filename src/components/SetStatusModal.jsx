@@ -21,7 +21,7 @@ export default function SetStatusModal({ isOpen, onClose }) {
     <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex justify-center items-center z-50">
       <div className="bg-gray-900 rounded-2xl shadow-xl p-6 w-full max-w-md text-white">
         {/* Title */}
-        <h2 className="text-2xl font-semibold mb-6">Set your status</h2>
+        <h2 className="text-sm font-semibold mb-2">Set your status</h2>
 
         {/* Status options - no scroll, fixed height */}
         <div className="space-y-2 mb-6">
@@ -29,12 +29,12 @@ export default function SetStatusModal({ isOpen, onClose }) {
             <div
               key={idx}
               onClick={() => setSelectedStatus(status.label)}
-              className={`flex items-center space-x-3 p-2 rounded-lg cursor-pointer hover:bg-gray-800 transition ${
+              className={`flex items-center space-x-3 p-1 rounded-lg cursor-pointer hover:bg-gray-800 transition ${
                 selectedStatus === status.label ? "bg-gray-800" : "bg-gray-700"
               }`}
             >
               <span className="text-lg">{status.icon}</span>
-              <span className="font-medium">{status.label}</span>
+              <span className="font-medium text-sm">{status.label}</span>
             </div>
           ))}
         </div>
@@ -55,7 +55,7 @@ export default function SetStatusModal({ isOpen, onClose }) {
         {/* Out of office toggle */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-2">
-            <span className="font-medium">Out of office</span>
+            <span className="font-medium text-sm">Out of office</span>
             <span
               className="text-gray-400 text-sm cursor-help"
               title="Let others know you are out of office."

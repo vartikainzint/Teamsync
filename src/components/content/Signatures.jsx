@@ -11,9 +11,9 @@ export default function SignaturesUI() {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-gray-200">
       {/* Sidebar */}
-      <div className="w-1/4 bg-gray-800 border-r p-4">
+      <div className="w-full md:w-64  bg-gray-800 border-r p-4">
         <input
           type="text"
           placeholder="Search signatures..."

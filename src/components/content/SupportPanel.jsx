@@ -42,7 +42,7 @@ const SupportPanel = () => {
         {/* Guides Section */}
         <div className="mt-4 bg-gray-800 p-4 rounded-lg">
           <p className="text-gray-700  font-semibold mb-2 text-sm">LEARN THE BASICS</p>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Getting Started */}
             <div className="bg-white p-4 rounded-lg shadow-md flex items-center">
               <span className="text-2xl mr-3">🎉</span>
@@ -100,9 +100,9 @@ const SupportPanel = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-800">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gray-900 text-gray-200">
       {/* Sidebar (Tabs) */}
-      <aside className="w-64 bg-gray-800 shadow-md p-4 border-r">
+      <aside className="w-full md:w-64 bg-gray-800 shadow-md p-4 border-r">
         {["support", "guides", "roadmap"].map((tab) => (
           <button
             key={tab}

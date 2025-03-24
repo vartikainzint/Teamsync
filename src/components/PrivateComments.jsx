@@ -17,13 +17,15 @@ const PrivateComments = () => {
     <div className=" px-4 py-3 bg-gray">
       {/* Displaying private comments */}
       {privateComments.length > 0 && (
-        <div className="space-y-2 mb-3">
+        <div className="space-y-2 mb-3 flex flex-col">
           {privateComments.map((comment, index) => (
+            <div class="">
             <div
               key={index}
-              className="bg-gray-200 text-gray-800 px-4 py-2 rounded-xl inline-block max-w-[80%]"
+              className="bg-gray-200 text-gray-800 px-4 py-2 rounded-xl inline-block"
             >
               {comment}
+            </div>
             </div>
           ))}
         </div>

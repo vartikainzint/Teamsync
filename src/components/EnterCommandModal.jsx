@@ -65,7 +65,7 @@ const EnterCommandModal = ({ isOpen, onClose }) => {
         className="bg-gray-900 text-white p-5 rounded-lg shadow-lg w-96"
         onClick={(e) => e.stopPropagation()} // Prevents modal close when clicking inside
       >
-        <h2 id="modal-title" className="text-lg font-semibold">
+        <h2 id="modal-title" className="text-sm font-semibold">
           What would you like to do?
         </h2>
 
@@ -77,7 +77,7 @@ const EnterCommandModal = ({ isOpen, onClose }) => {
                 alert(`Selected: ${action.name}`);
                 onClose();
               }}
-              className={`flex justify-between items-center px-4 py-2 rounded-md cursor-pointer transition-colors ${
+              className={`flex justify-between items-center px-4 py-2 rounded-md cursor-pointer text-sm transition-colors ${
                 selectedIndex === index ? "bg-blue-500 text-white" : "hover:bg-gray-700"
               }`}
             >
