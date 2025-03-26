@@ -186,7 +186,7 @@ export default function UserList() {
 
       {/* Modal */}
       {isModalOpen && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70">
+  <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
     <div className="relative bg-gray-900 text-white rounded-xl shadow-2xl w-full max-w-md mx-4">
       
       {/* Modal Header */}

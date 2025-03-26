@@ -54,7 +54,7 @@ const EnterCommandModal = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80"
+      className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50"
       onClick={handleOutsideClick}
     >
       <div

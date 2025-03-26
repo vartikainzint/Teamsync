@@ -14,53 +14,54 @@ export default function EmailConversationCard() {
     <div className="flex flex-col bg-gray dark:bg-gray-900 text-white-800 dark:text-white-200 rounded-md  border-gray-300 dark:border-gray-700 shadow-sm max-w-3xl mx-auto">
       
       {/* Toolbar Header */}
-      <div className="flex justify-between items-center px-4 py-2 border-b border-gray-200 dark:border-gray-700">
-        
-        {/* Subject Input */}
-        <input
-          type="text"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          placeholder="Enter subject"
-          className="text-lg font-medium focus:outline-none bg-transparent flex-grow dark:text-white-100"
-        />
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-2 sm:px-4 py-2 border-b border-gray-200 dark:border-gray-700 space-y-2 sm:space-y-0">
+  
+  {/* Subject Input */}
+  <input
+    type="text"
+    value={subject}
+    onChange={(e) => setSubject(e.target.value)}
+    placeholder="Enter subject"
+    className="text-base sm:text-lg font-medium focus:outline-none bg-transparent w-full sm:flex-grow dark:text-white"
+  />
 
-        {/* Toolbar Buttons */}
-        <div className="flex items-center space-x-3 ml-4 shrink-0">
-          <button
-            onClick={() => handleAction('Assign')}
-            className="text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200 text-sm"
-          >
-            Assign to me
-          </button>
-          <button
-            onClick={() => handleAction('Mark as Done')}
-            className="text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200"
-          >
-            <Check className="h-5 w-5" />
-          </button>
-          <UserPlus
-            onClick={() => handleAction('Add User')}
-            className="h-5 w-5 cursor-pointer text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200"
-          />
-          <Bell
-            onClick={() => handleAction('Snooze')}
-            className="h-5 w-5 cursor-pointer text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200"
-          />
-          <Archive
-            onClick={() => handleAction('Archive')}
-            className="h-5 w-5 cursor-pointer text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200"
-          />
-          <Trash2
-            onClick={() => handleAction('Delete')}
-            className="h-5 w-5 cursor-pointer text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200"
-          />
-          <MoreHorizontal
-            onClick={() => handleAction('More Options')}
-            className="h-5 w-5 cursor-pointer text-white-600 dark:text-white-400 hover:text-white-800 dark:hover:text-white-200"
-          />
-        </div>
-      </div>
+  {/* Toolbar Buttons */}
+  <div className="flex items-center space-x-2 sm:space-x-3 ml-0 sm:ml-4 shrink-0 flex-wrap">
+    <button
+      onClick={() => handleAction('Assign')}
+      className="text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 text-xs sm:text-sm"
+    >
+      Assign to me
+    </button>
+    <button
+      onClick={() => handleAction('Mark as Done')}
+      className="text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+    >
+      <Check className="h-4 w-4 sm:h-5 sm:w-5" />
+    </button>
+    <UserPlus
+      onClick={() => handleAction('Add User')}
+      className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+    />
+    <Bell
+      onClick={() => handleAction('Snooze')}
+      className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+    />
+    <Archive
+      onClick={() => handleAction('Archive')}
+      className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+    />
+    <Trash2
+      onClick={() => handleAction('Delete')}
+      className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+    />
+    <MoreHorizontal
+      onClick={() => handleAction('More Options')}
+      className="h-4 w-4 sm:h-5 sm:w-5 cursor-pointer text-gray-100 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200"
+    />
+  </div>
+</div>
+
 
       {/* Body Description */}
       <div className="px-4 py-5 space-y-6">

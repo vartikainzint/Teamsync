@@ -36,7 +36,19 @@ const Dashboard = () => {
     setMobileSidebarOpen(false); // Close sidebar on mobile
     setSelectedConversation(null); // Reset selected conversation on tab change
   };
-
+  const getMobileHeaderTitle = (tab) => {
+    const customTitles = {
+      Inbox: "Your Emails",
+      NewEmail: "Compose Email",
+      NewConversation: "Start Chat",
+      Task: "Tasks Overview",
+      Calendars: "Schedule",
+      Room: "Chat Room",
+      All: "All Activities",
+    };
+    return customTitles[tab] || "Dashboard"; // Default to "Dashboard" if no match
+  };
+  
   return (
     <div className="flex h-screen overflow-hidden bg-gray-900 text-gray-200 relative">
 
@@ -93,9 +105,10 @@ const Dashboard = () => {
           >
             <Menu className="h-6 w-6" />
           </button>
-          <h1 className="text-lg font-semibold capitalize">
-            {isNewMail ? "New Email" : selectedTab}
-          </h1>
+          <h1 className="text-lg font-semibold">
+  {isNewMail ? "New Email" : getMobileHeaderTitle(selectedTab)}
+</h1>
+
           <div></div>
         </div>
 

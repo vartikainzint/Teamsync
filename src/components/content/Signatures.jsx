@@ -67,7 +67,7 @@ export default function SignaturesUI() {
       </div>
         {/* Modal Overlay */}
         {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50 w-full">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
           {/* Modal Content */}
           <div className="bg-gray-800 w-[600px] rounded-lg shadow-lg p-6 relative">
             {/* Modal Header */}

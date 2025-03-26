@@ -106,7 +106,7 @@ export default function BillingPlans() {
 
       {/* Modal Overlay */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50 w-full">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
           <div className="bg-gray-800 rounded-lg p-6 w-96 shadow-lg">
             <h3 className="text-sm font-semibold">
               Upgrade to the <span className="text-blue-600">{planToUpgrade.name} {billingCycle}</span> plan?

@@ -55,7 +55,7 @@ export default function CreateOrganizationModal({ isOpen, onClose, onCreate }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 dark:bg-opacity-80 flex items-center justify-center z-50 p-2 sm:p-4">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
       <div className="bg-gray-800 border border-gray-700 rounded-2xl shadow-xl w-full max-w-md sm:max-w-lg md:max-w-2xl relative p-4 sm:p-6 md:p-8 overflow-y-auto max-h-[90vh]">
         {/* Close Button */}
         <button

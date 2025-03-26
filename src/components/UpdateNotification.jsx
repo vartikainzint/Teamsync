@@ -7,7 +7,7 @@ export default function UpdateNotification({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex justify-center items-center z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
       <div className="bg-gray-900 rounded-2xl shadow-xl p-6 w-full max-w-md text-white">
         {/* Title */}
         <h2 className="text-lg font-semibold flex items-center justify-center gap-1">

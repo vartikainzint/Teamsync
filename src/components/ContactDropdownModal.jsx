@@ -37,7 +37,7 @@ const ContactDropdownModal = ({ isOpen, onClose }) => {
   return (
     <>
       {/* Main Modal */}
-      <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" onClick={handleOutsideClick}>
+      <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50" onClick={handleOutsideClick}>
         <div
           ref={modalRef}
           tabIndex={-1}
@@ -62,7 +62,7 @@ const ContactDropdownModal = ({ isOpen, onClose }) => {
 
       {/* New Contact Book Modal */}
       {isNewBookModalOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-90 flex justify-center items-center z-50" onClick={() => setIsNewBookModalOpen(false)}>
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50" onClick={() => setIsNewBookModalOpen(false)}>
           <div className="bg-gray-800 w-full max-w-sm rounded-lg shadow-lg p-6 relative text-center" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-lg font-semibold text-gray-300">New contact book</h2>
             

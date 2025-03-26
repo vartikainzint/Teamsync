@@ -102,7 +102,7 @@ const Rules = () => {
 
       {/* Modal */}
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-30 z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
           <div className="bg-gray-800 w-[500px] rounded-lg shadow-lg p-6 relative">
             {/* Close Button */}
             <button
@@ -263,7 +263,7 @@ const Rules = () => {
         ))}
       </div>
       {modal.open && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-10 z-50 w-full">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
         <div className="bg-gray-800 w-[500px] p-6 rounded-lg w-96 shadow-lg relative z-50">
             <h2 className="text-lg font-bold text-white">Incoming email rule for {modal.platform}</h2>
             <input

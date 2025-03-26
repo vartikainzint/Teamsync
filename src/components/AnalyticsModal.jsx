@@ -7,7 +7,7 @@ const AnalyticsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
+    <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
       <div className="bg-gray-900 text-white w-full sm:w-3/4 h-auto sm:h-5/6 rounded-lg shadow-lg flex flex-col sm:flex-row p-0">
         {/* Sidebar */}
         <aside className="w-full sm:w-1/4 bg-gray-800 p-4 border-b sm:border-r border-gray-700">

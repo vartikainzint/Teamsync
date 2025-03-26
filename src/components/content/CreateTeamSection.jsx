@@ -79,7 +79,7 @@ const CreateTeamSection = () => {
 
       {/* Modal Overlay and Content */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
           <div className="w-full max-w-4xl bg-gray-800 border border-gray-600 rounded-xl p-8 space-y-6 relative shadow-lg">
             <h2 className="text-2xl font-semibold">
               {editingTeam ? "Edit Team" : "Create New Team"}

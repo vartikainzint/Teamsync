@@ -74,9 +74,9 @@ const CalendarComponent = () => {
 
       {/* Modal for Adding Event */}
       {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 px-4">
+        <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
           <div className="bg-gray-800 p-5 md:p-6 rounded-lg shadow-xl w-full max-w-md border border-gray-700">
-            <h2 className="text-lg font-semibold mb-4 text-white">Add New Event</h2>
+            <h2 className="text-lg font-semibold  mb-4 text-white">Add New Event</h2>
             <input
               type="text"
               placeholder="Event Title"

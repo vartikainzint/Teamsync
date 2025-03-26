@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Button, Input } from "antd";
-import { GoogleOutlined, AppleOutlined } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../Redux/features/auth/authSlice";
 import { toast, ToastContainer } from "react-toastify"; // ✅ Correct import
 import "react-toastify/dist/ReactToastify.css"; // ✅ Required for styles
 import RightSideSection from "../components/RightSideSection";
-const LoginPage = () => {
+
+
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,25 +42,12 @@ const LoginPage = () => {
   <div className="w-full md:w-1/2 h-screen overflow-y-auto flex justify-center items-center pt-12">
     <div className="w-full max-w-md bg-gray-900  rounded-lg shadow-lg">
       <div className="max-w-md w-full space-y-4">
-        <h2 className="text-xl font-semibold text-center mb-2">Log in to TeamSync</h2>
-        <p className="text-center text-gray-400 text-sm">Your business-first collaborative inbox</p>
-
-        <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg" icon={<GoogleOutlined />}>
-          Continue with Google
-        </Button>
-        <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg" icon={<AppleOutlined />}>
-          Continue with Apple
-        </Button>
-        <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg">Single sign-on (SSO)</Button>
-
-        <div className="relative flex py-2 items-center">
-          <div className="flex-grow border-t border-gray-600"></div>
-          <span className="flex-shrink mx-4 text-gray-400">OR</span>
-          <div className="flex-grow border-t border-gray-600"></div>
-        </div>
-
+        <h2 className="text-xl font-semibold text-center mb-2">Forgot your password?
+        </h2>
+        <p className="text-center text-gray-400 text-sm">Enter your email to receive password reset instructions
+        </p>
         <div>
-          <label className="block text-gray-400 mb-1 text-sm">Work email</label>
+          <label className="block text-gray-400 mb-1 text-sm">Email</label>
           <Input
             placeholder="Enter your email address..."
             className="!py-2 !px-3 w-full bg-gray-700 border border-gray-600 text-white"
@@ -68,26 +56,15 @@ const LoginPage = () => {
           />
         </div>
 
-        <div>
-          <label className="block text-gray-400 mb-1 text-sm">Password</label>
-          <Input.Password
-            placeholder="Password"
-            className="!py-2 !px-3 w-full"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
         {error && <p className="text-red-500 text-center">{error}</p>}
-        <div className="text-right">
-        <Link to="/forgotpassword" className="text-blue-400  text-sm text-blue-400 cursor-pointer">Forgot your password?</Link>
-        </div>
+
+
         <Button type="primary" className="!p-4 w-full bg-blue-600" loading={loading} onClick={handleLogin}>
-          Log in
+          Send Me Instructions 
         </Button>
 
         <p className="text-center text-gray-400 text-sm">
-          New to TeamSync? <Link to="/register" className="text-blue-400">Create an account</Link>
+        Just remembered? <Link to="/login" className="text-blue-400">Login</Link>
         </p>
       </div>
     </div>
@@ -103,5 +80,5 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForgotPassword;
  

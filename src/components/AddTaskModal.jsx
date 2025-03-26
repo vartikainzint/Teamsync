@@ -33,7 +33,7 @@ export default function AddTaskModal({ onClose, onSave }) {
 
   return (
     <div
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start z-50 p-2 pt-20"
+      className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50"
       onClick={onClose} // Close modal when clicking outside
     >
       <div

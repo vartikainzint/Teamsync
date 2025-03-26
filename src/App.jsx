@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import RegisterPage from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword"; // Adjust the import path as needed
 
 function Layout({ children }) {
   const location = useLocation();
@@ -44,7 +45,7 @@ function App() {
         ) : (
           <Route path="/" element={<Layout><Home /></Layout>} />
         )}
-        
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/features" element={<Layout><Features /></Layout>} />
         <Route path="/pricing" element={<Layout><Pricing /></Layout>} />
         <Route path="/help" element={<Layout><Help /></Layout>} />
