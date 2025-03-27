@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css"; // ✅ Required for styles
 import RightSideSection from "../components/RightSideSection";
 
 
-const SSO = () => {
+const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -42,29 +42,33 @@ const SSO = () => {
   <div className="w-full md:w-1/2 h-screen overflow-y-auto flex justify-center items-center pt-12">
     <div className="w-full max-w-md bg-gray-900  rounded-lg">
       <div className="max-w-md w-full space-y-4">
-        <h2 className="text-xl font-semibold text-center mb-2">Forgot your password?
+        <h2 className="text-xl font-semibold text-center mb-2">Single sign-on (SSO)
+
         </h2>
-        <p className="text-center text-gray-400 text-sm">Enter your email to receive password reset instructions
+        <p className="text-center text-gray-400 text-sm">Sign in using an identity provider configured by your organization
+
         </p>
         <div>
-          <label className="block text-gray-400 mb-1 text-sm">Email</label>
-          <Input
-            placeholder="Enter your email address..."
-            className="!py-2 !px-3 w-full bg-gray-700 border border-gray-600 text-white"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <label className="block text-gray-400 mb-1 text-sm">Login keyword
+          </label>
+          <Input 
+                placeholder="Enter your organization login keyword…" 
+                name="name" 
+                className="!py-2 !px-3 w-full" 
+              />
         </div>
 
-        {error && <p className="text-red-500 text-center">{error}</p>}
+        {error && <p className="text-red-500 text-center">No organization matches this keyword. Ask an admin what is your <strong>Login keyword</strong> or open your SSO provider’s dashboard to log in to TeamSync.
+
+</p>}
 
 
         <Button type="primary" className="!p-4 w-full bg-blue-600" loading={loading} onClick={handleLogin}>
-          Send Me Instructions 
+        Log in with SSO
         </Button>
 
         <p className="text-center text-gray-400 text-sm">
-        Just remembered? <Link to="/login" className="text-blue-400">Login</Link>
+        <Link to="/login" className="text-blue-400">Log in with a password</Link>
         </p>
       </div>
     </div>
@@ -80,5 +84,5 @@ const SSO = () => {
   );
 };
 
-export default SSO;
+export default ForgotPassword;
  

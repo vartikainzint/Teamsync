@@ -12,7 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import ForgotPassword from "./pages/ForgotPassword"; // Adjust the import path as needed
-
+import SSO from "./pages/SsoLogin";
 function Layout({ children }) {
   const location = useLocation();
   const isDashboard = location.pathname.startsWith("/dashboard");
@@ -45,6 +45,7 @@ function App() {
         ) : (
           <Route path="/" element={<Layout><Home /></Layout>} />
         )}
+        <Route path="/ssologin" element={<SSO />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/features" element={<Layout><Features /></Layout>} />
         <Route path="/pricing" element={<Layout><Pricing /></Layout>} />

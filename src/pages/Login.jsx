@@ -36,7 +36,7 @@ const LoginPage = () => {
 
   return (
     <>    
-  <div className="flex h-screen bg-gray-900 text-white min-w-screen">
+  <div className="flex h-full bg-gray-900 text-white min-w-screen p-6">
   {/* Left Section - Scrollable */}
   <div className="w-full md:w-1/2 h-screen overflow-y-auto flex justify-center items-center pt-12">
     <div className="w-full max-w-md bg-gray-900  rounded-lg shadow-lg">
@@ -50,8 +50,9 @@ const LoginPage = () => {
         <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg" icon={<AppleOutlined />}>
           Continue with Apple
         </Button>
+        <Link to="/ssologin" className="w-full">
         <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg">Single sign-on (SSO)</Button>
-
+        </Link>
         <div className="relative flex py-2 items-center">
           <div className="flex-grow border-t border-gray-600"></div>
           <span className="flex-shrink mx-4 text-gray-400">OR</span>
