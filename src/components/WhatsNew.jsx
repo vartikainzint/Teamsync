@@ -17,8 +17,8 @@ export default function WhatsNew({ isOpen, onClose }) {
         {/* Content */}
         <div className="bg-gray-900 p-3 rounded-md mt-3 text-gray-100 text-sm">
           <p>
-            As you may know, Missive’s growth is 100% organic and based on word
-            of mouth. We’re very thankful for everyone sharing Missive so far
+            As you may know, TeasmSync’s growth is 100% organic and based on word
+            of mouth. We’re very thankful for everyone sharing TeasmSync so far
             and invite you to become an affiliate to earn back when you refer
             someone. Read more about our
             <a href="#" className="text-blue-500 hover:underline"> referral program </a>
