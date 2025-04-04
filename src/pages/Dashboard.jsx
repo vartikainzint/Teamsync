@@ -116,7 +116,7 @@ const Dashboard = () => {
         <div className="h-full space-y-4">
 
           {/* Show Email/Conversation Layout */}
-          {(selectedTab === "Inbox" || selectedTab === "NewEmail" || selectedTab === "NewConversation") && (
+          {(selectedTab === "Inbox" || selectedTab === "NewEmail" || selectedTab === "NewConversation" || selectedTab.includes("OrgInbox")) && (
             <div className="flex flex-col sm:flex-row h-full">
               
               {/* Email List on Left */}
@@ -158,7 +158,9 @@ const Dashboard = () => {
               <ChatLayout />
             </div>
           )}
+          
  {selectedTab.includes("Room") && <Room />}
+
         </div>
       </div>
     </div>

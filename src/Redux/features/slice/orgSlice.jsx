@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-
-const BASE_URL = 'http://localhost:3000/dev/api';
-
+ 
+const API_URL =  `${import.meta.env.VITE_APP_URL}/api`;
+ 
 const getAuthHeader = (token) => ({
   headers: {
     Authorization: `Bearer ${token}`,
     withCredentials: true,
   },
 });
-
+ 
 // Async thunk to fetch organizations with auth
 export const fetchOrganizations = createAsyncThunk(
   'org/fetchOrganizations',
@@ -18,28 +18,31 @@ export const fetchOrganizations = createAsyncThunk(
       const state = getState();
       const token = state.auth.token;  // Access token from auth slice
       const response = await axios.get(
-        `${BASE_URL}/org/`,
+        `${API_URL}/org/`,
         getAuthHeader(token)
       );
       console.log("response data",response.data);
-      console.log("response data data",response.data.data);
-      console.log("response data data data",response.data.data.data);
       return response.data.data;
-      
+     
     } catch (error) {
       return rejectWithValue(error.response?.data || { error: 'Something went wrong' });
     }
   }
 );
-
+ 
 const orgSlice = createSlice({
   name: 'org',
   initialState: {
     organizations: null,
+    selectedOrganizationId: null,
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setSelectedOrganization: (state, action) => {
+      state.selectedOrganizationId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOrganizations.pending, (state) => {
@@ -57,5 +60,5 @@ const orgSlice = createSlice({
       });
   },
 });
-
+export const { setSelectedOrganization } = orgSlice.actions;
 export default orgSlice.reducer;

@@ -79,7 +79,7 @@ export default function SettingsModal({ isOpen, onClose }) {
 
         {/* Close Button */}
         <button
-          className="absolute top-4 right-4 text-gray-400 hover:text-white transition z-50"
+          className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
           onClick={onClose}
         >
           <X size={24} />
@@ -95,7 +95,7 @@ export default function SettingsModal({ isOpen, onClose }) {
 
         {/* Sidebar */}
         <div
-          className={`fixed top-0 left-0 h-full bg-gray-800 border-r border-gray-700 overflow-y-auto z-40 transform ${
+          className={`fixed top-0 left-0 h-full bg-gray-800 border-r border-gray-700 overflow-y-auto transform ${
             showSidebar ? "translate-x-0" : "-translate-x-full"
           } transition-transform duration-300 ease-in-out md:static md:translate-x-0 md:w-1/4 w-3/4 max-h-full`}
         >
