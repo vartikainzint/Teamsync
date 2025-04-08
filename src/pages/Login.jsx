@@ -7,6 +7,9 @@ import { loginUser } from "../Redux/features/auth/authSlice";
 import { toast, ToastContainer } from "react-toastify"; // ✅ Correct import
 import "react-toastify/dist/ReactToastify.css"; // ✅ Required for styles
 import RightSideSection from "../components/RightSideSection";
+import { signInWithPopup } from "firebase/auth"; // ✅ correct
+import { auth, provider } from "../firebaseConfig"; // ✅ your custom exports
+
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,7 +36,37 @@ const LoginPage = () => {
       }
     });
   };
-
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        toast.success(`Welcome ${user.displayName}`, { position: "top-right" });
+  
+        // You can also dispatch Redux login success if you want to store it in your state
+        // dispatch(loginWithGoogle(user));
+  
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 3000);
+      })
+      .catch((error) => {
+        console.error(error);
+        toast.error("Google login failed", { position: "top-right" });
+      });
+  };
+  const handleAppleAuth = () => {
+    const provider = new OAuthProvider('apple.com');
+  
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log("Apple user:", user);
+        // Optional: Save user to Firestore
+      })
+      .catch((error) => {
+        console.error("Apple sign-in error:", error);
+      });
+  };
   return (
     <>    
   <div className="flex h-full bg-gray-900 text-white min-w-screen p-6">
@@ -44,12 +77,22 @@ const LoginPage = () => {
         <h2 className="text-xl font-semibold text-center mb-2">Log in to TeamSync</h2>
         <p className="text-center text-gray-400 text-sm">Your business-first collaborative inbox</p>
 
-        <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg" icon={<GoogleOutlined />}>
-          Continue with Google
-        </Button>
-        <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg" icon={<AppleOutlined />}>
-          Continue with Apple
-        </Button>
+        <Button
+  className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg"
+  icon={<GoogleOutlined />}
+  onClick={handleGoogleLogin}
+>
+  Continue with Google
+</Button>
+
+<Button 
+  className="w-full flex items-center justify-center" 
+  icon={<AppleOutlined />} 
+  onClick={handleAppleAuth}
+> 
+  Continue with Apple 
+</Button>
+
         <Link to="/ssologin" className="w-full">
         <Button className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg">Single sign-on (SSO)</Button>
         </Link>
