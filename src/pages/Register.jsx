@@ -7,6 +7,9 @@ import { registerUser } from "../Redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import RightSideSection from "../components/RightSideSection";
+import { signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebaseConfig";
+
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -38,7 +41,24 @@ const RegisterPage = () => {
       }
     });
   };
-
+  const handleGoogleAuth = () => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      const user = result.user;
+      console.log("Logged in user:", user);
+    
+      toast.success("Google Sign-in successful!");
+    
+      setTimeout(() => {
+        navigate("/dashboard"); // or wherever
+      }, 2000);
+    })
+    
+      .catch((error) => {
+        console.error("Error during Google sign-in:", error);
+      });
+  };
+  
   return (
     <div className="flex h-full bg-gray-900 text-white min-w-screen p-6">
       {/* Left Side - Register Form */}
@@ -48,9 +68,14 @@ const RegisterPage = () => {
           <h2 className="text-xl font-semibold text-center mb-2">Create an Account</h2>
           <p className="text-center text-gray-400  text-sm">Sign up for a collaborative inbox</p>
 
-          <Button className="w-full flex items-center justify-center !py-2 !px-3" icon={<GoogleOutlined />}> 
-            Continue with Google 
-          </Button>
+          <Button
+  className="w-full flex items-center justify-center !mb-3 !p-4 bg-gray-800 hover:bg-gray-700 rounded-lg"
+  icon={<GoogleOutlined />}
+  onClick={handleGoogleAuth}
+>
+  Continue with Google
+</Button>
+
           <Button className="w-full flex items-center justify-center" icon={<AppleOutlined />}> 
             Continue with Apple 
           </Button>
