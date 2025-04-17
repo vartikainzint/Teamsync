@@ -6,7 +6,7 @@ const InviteUserModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-opacity-20 backdrop-blur-md z-50">
-      <div className="bg-[#1B1C1D] p-6 rounded-lg shadow-lg w-[400px] text-white relative">
+      <div className="bg-[#1B1C1D] p-6 rounded-lg shadow-lg w-[500px] text-white relative">
         {/* Close Button */}
         <button onClick={onClose} className="absolute top-3 right-3 text-gray-400 hover:text-gray-200">
           <X size={20} />
