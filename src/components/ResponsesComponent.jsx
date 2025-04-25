@@ -46,7 +46,7 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
               All
             </button>
             <button 
-              className={`p-2 text-left ${activeTab === "Personal" ? "bg-blue-600 text-white" : "text-gray-300"}`}
+              className={`p-2  text-sm text-left ${activeTab === "Personal" ? "bg-blue-600 text-white" : "text-gray-300"}`}
               onClick={() => setActiveTab("Personal")}
             >
               Personal
@@ -67,7 +67,7 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
             {responses[activeTab].map((response, index) => (
               <li 
                 key={index} 
-                className={`p-2 cursor-pointer flex justify-between items-center ${selectedResponse === response ? "bg-blue-600 text-white" : "text-gray-300"}`}
+                className={`p-2 text-sm cursor-pointer flex justify-between items-center ${selectedResponse === response ? "bg-blue-600 text-white" : "text-gray-300"}`}
                 onClick={() => setSelectedResponse(response)}
               >
                 <span>{response}</span>
@@ -84,14 +84,14 @@ const ResponsesComponent = ({ isOpen, onClose }) => {
             <input
               type="text"
               placeholder="Title"
-              className="w-full p-2 mb-3 bg-gray-800 text-white border border-gray-600 rounded"
+              className="w-full text-sm p-2 mb-3 bg-gray-800 text-white border border-gray-600 rounded"
             />
           )}
 
           <div className="bg-gray-800 p-3 flex flex-col">
             <label className="text-gray-400 mb-1">Personal</label>
             <select
-              className="w-full p-2 bg-gray-900 text-white border border-gray-600 rounded"
+              className="w-full text-sm p-2 bg-gray-900 text-white border border-gray-600 rounded"
               value={selectedRecipient}
               onChange={(e) => setSelectedRecipient(e.target.value)}
             >
